@@ -183,6 +183,16 @@
   .pcard ol{margin:0;padding-left:17px}
   .pcard ol li{font-size:11px;margin:2.5px 0;color:#222}
   .pdisc{font-size:10px;color:#888;margin-top:14px;border-top:1px solid #00000018;padding-top:8px}
+  @media(max-width:600px){
+    body { padding: 12px 8px 30px; }
+    .setup { grid-template-columns: 1fr; }
+    .setbar { flex-direction: column; gap: 14px; align-items: stretch; }
+    .stepper { justify-content: space-between; }
+    .vsel { max-width: none; flex: 1; margin-left: 10px; }
+    .tabwrap { flex-direction: column; align-items: stretch; }
+    .exsel { max-width: 100%; }
+    .pbtn { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -744,6 +754,10 @@ function pickVoice(){
   if(!voices.length) return;
   const en = voices.filter(v=>/^en/i.test(v.lang));
   const pool = (en.length?en:voices).slice().sort((a,b)=>rankVoice(b)-rankVoice(a));
+  if(window.savedVoice) {
+    const sv = pool.find(v=>v.name===window.savedVoice);
+    if(sv) chosenVoice = sv;
+  }
   if(!chosenVoice || !voices.includes(chosenVoice)) chosenVoice = pool[0];
   buildVoiceMenu(pool);
 }
@@ -895,9 +909,30 @@ function startSequence(fresh){
   }
 }
 
+function savePrefs(){
+  const v = document.getElementById("voiceSel") ? document.getElementById("voiceSel").value : null;
+  try { localStorage.setItem("mygm_prefs", JSON.stringify({idx, totalSets, restSec, exRestSec, intervalMs, soundOn, voice:v})); } catch(e){}
+}
+function loadPrefs(){
+  try {
+    const p = JSON.parse(localStorage.getItem("mygm_prefs"));
+    if(p){
+      if(typeof p.idx==="number" && EX[p.idx]) idx = p.idx;
+      if(typeof p.totalSets==="number") totalSets = p.totalSets;
+      if(typeof p.restSec==="number") restSec = p.restSec;
+      if(typeof p.exRestSec==="number") exRestSec = p.exRestSec;
+      if(typeof p.intervalMs==="number") intervalMs=p.intervalMs;
+      if(typeof p.soundOn==="boolean") soundOn=p.soundOn;
+      if(p.voice) window.savedVoice = p.voice;
+    }
+  } catch(e){}
+  cat = EX[idx] ? EX[idx].cat : "strap";
+}
+
 function go(i){
   idx=i; lastP=0; t0=performance.now();
   cat=EX[idx].cat;
+  savePrefs();
   renderDropdowns(); renderInfo(); startSequence(true);
 }
 
@@ -920,16 +955,18 @@ document.getElementById("sound").onclick=()=>{
   soundOn=!soundOn; unlockAudio();
   if(!soundOn && "speechSynthesis" in window){ try{speechSynthesis.cancel();}catch(e){} }
   document.getElementById("soundicon").innerHTML = soundOn ? SPK_ON : SPK_OFF;
+  savePrefs();
 };
 document.getElementById("paceRange").oninput=(e)=>{
   const v=parseFloat(e.target.value); intervalMs=v*1000;
   document.getElementById("paceVal").textContent=v.toFixed(1)+"s";
   if(phase==="counting" && playing && repTimer){ seq++; startTicking(seq); }  // apply new pace, keep count
 };
+document.getElementById("paceRange").onchange=savePrefs;
 const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
-function setSets(v){ totalSets=clampN(v,1,6); document.getElementById("setsVal").textContent=totalSets; }
-function setRest(v){ restSec=clampN(v,0,90); document.getElementById("restVal").textContent=restSec+"s"; }
-function setExRest(v){ exRestSec=clampN(v,0,180); document.getElementById("exRestVal").textContent=exRestSec+"s"; }
+function setSets(v){ totalSets=clampN(v,1,6); document.getElementById("setsVal").textContent=totalSets; savePrefs(); }
+function setRest(v){ restSec=clampN(v,0,90); document.getElementById("restVal").textContent=restSec+"s"; savePrefs(); }
+function setExRest(v){ exRestSec=clampN(v,0,180); document.getElementById("exRestVal").textContent=exRestSec+"s"; savePrefs(); }
 document.getElementById("setsUp").onclick=()=>setSets(totalSets+1);
 document.getElementById("setsDn").onclick=()=>setSets(totalSets-1);
 document.getElementById("restUp").onclick=()=>setRest(restSec+5);
@@ -940,6 +977,7 @@ const vsel=document.getElementById("voiceSel");
 if(vsel) vsel.onchange=()=>{
   unlockAudio();
   chosenVoice = voices.find(v=>v.name===vsel.value) || chosenVoice;
+  savePrefs();
   if(soundOn && "speechSynthesis" in window){ try{ speechSynthesis.cancel(); speechSynthesis.speak(makeUtter("Three, two, one, go.")); }catch(e){} }
 };
 document.getElementById("printBtn").onclick=()=>window.print();
@@ -948,6 +986,14 @@ document.addEventListener("keydown",e=>{
   else if(e.key==="ArrowLeft")document.getElementById("prev").click();
   else if(e.key===" "){e.preventDefault();document.getElementById("play").click();}
 });
+
+loadPrefs();
+document.getElementById("setsVal").textContent=totalSets;
+document.getElementById("restVal").textContent=restSec+"s";
+document.getElementById("exRestVal").textContent=exRestSec+"s";
+document.getElementById("paceRange").value=intervalMs/1000;
+document.getElementById("paceVal").textContent=(intervalMs/1000).toFixed(1)+"s";
+document.getElementById("soundicon").innerHTML = soundOn ? SPK_ON : SPK_OFF;
 
 fit(); renderDropdowns(); renderInfo(); renderPrintSheet(); startSequence(true); requestAnimationFrame(frame);
 </script>
