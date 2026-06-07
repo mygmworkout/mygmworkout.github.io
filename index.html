@@ -1756,7 +1756,7 @@
       if (!("speechSynthesis" in window)) return;
       voices = speechSynthesis.getVoices() || [];
       if (!voices.length) return;
-      const novelty = /hazel|fred|albert|compact|espeak|e-speak|bad news|bahh|bells|boing|bubbles|cellos|wobble|good news|jester|junior|kathy|zarvox|trinoids|whisper|ralph|princess|pipe organ|deranged|hysterical/i;
+      const novelty = /\b(hazel|fred|albert|compact|espeak|e-speak|bad news|bahh|bells|boing|bubbles|cellos|wobble|good news|jester|junior|kathy|zarvox|trinoids|whisper|ralph|princess|organ|pipe organ|deranged|hysterical|superstar)\b/i;
       const en = voices.filter(v => /^en/i.test(v.lang) && !novelty.test(v.name));
       const pool = (en.length ? en : voices).slice().sort((a, b) => rankVoice(b) - rankVoice(a));
       if (window.savedVoice) {
