@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Sped up the voice rate for the "3-2-1 Go" countdowns and explicitly linked the exercise start (`beginCounting`) to the speech synthesizer's `onend` event to completely eliminate audio overlap.
 - Delayed the start of the visible Set Rest and Ex. Rest countdown timers (and circular SVG animations) until the voice has fully finished speaking the set completion and rest duration phrases.
+- Explicitly synchronized the final 3-2-1 visual countdown numbers during rest periods to wait for the speech synthesizer's `onend` event, ensuring the text never ticks down faster than the voice can speak them.
 - Flawlessly synced the visual exercise steps (`<ol class="steps">`) to dynamically highlight exactly as the voice reads each step aloud during the intro phase.
 - Dynamically collapse the exercise info (`.info`), pacebar, and setbar during active sets *and* rest periods to maintain a clean focus purely on the workout animation. They restore only when previewing or done.
 - Perfectly synchronized the spoken voice counts with the on-screen character animation by dynamically driving the counts directly from the animation frame loop.

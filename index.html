@@ -1935,8 +1935,34 @@
           if (rem <= 0) { document.getElementById("restSvg").style.opacity = "0"; go(nextIdx); return; }
           setRepText(rem);
           document.getElementById("restCircle").style.strokeDashoffset = 276.5 * (1 - rem / total);
-          if (rem <= 3) say(rem, true, 1.7);
-          rem--; setTimeout(step, 1000);
+          
+          if (rem <= 3) {
+            if (soundOn && unlocked && "speechSynthesis" in window) {
+              try {
+                const u = makeUtter(rem);
+                u.rate = 1.7;
+                const start = performance.now();
+                const next = () => {
+                  if (token !== seq || !playing) { document.getElementById("restSvg").style.opacity = "0"; return; }
+                  rem--;
+                  const elapsed = performance.now() - start;
+                  const delay = Math.max(0, 1000 - elapsed);
+                  setTimeout(step, delay);
+                };
+                u.onend = next;
+                u.onerror = next;
+                speechSynthesis.speak(u);
+              } catch (e) {
+                if (soundOn && unlocked) beep();
+                rem--; setTimeout(step, 1000);
+              }
+            } else {
+              if (soundOn && unlocked) beep();
+              rem--; setTimeout(step, 1000);
+            }
+          } else {
+            rem--; setTimeout(step, 1000);
+          }
         };
         step();
       };
@@ -1989,8 +2015,34 @@
           }
           setRepText(rem);
           document.getElementById("restCircle").style.strokeDashoffset = 276.5 * (1 - rem / total);
-          if (rem <= 3) say(rem, true, 1.7);
-          rem--; setTimeout(step, 1000);
+          
+          if (rem <= 3) {
+            if (soundOn && unlocked && "speechSynthesis" in window) {
+              try {
+                const u = makeUtter(rem);
+                u.rate = 1.7;
+                const start = performance.now();
+                const next = () => {
+                  if (token !== seq || !playing) { document.getElementById("restSvg").style.opacity = "0"; return; }
+                  rem--;
+                  const elapsed = performance.now() - start;
+                  const delay = Math.max(0, 1000 - elapsed);
+                  setTimeout(step, delay);
+                };
+                u.onend = next;
+                u.onerror = next;
+                speechSynthesis.speak(u);
+              } catch (e) {
+                if (soundOn && unlocked) beep();
+                rem--; setTimeout(step, 1000);
+              }
+            } else {
+              if (soundOn && unlocked) beep();
+              rem--; setTimeout(step, 1000);
+            }
+          } else {
+            rem--; setTimeout(step, 1000);
+          }
         };
         step();
       };
