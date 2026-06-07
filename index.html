@@ -70,8 +70,8 @@
   .stage{position:relative;background:
       radial-gradient(120% 120% at 35% 12%, #20271a 0%, transparent 60%),
       linear-gradient(180deg,#191e13,#11140d);
-    padding:14px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
-  @media(min-width:880px){.stage{border-bottom:none;border-right:1px solid var(--line)}}
+    padding:14px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--line)}
+  @media(min-width:880px){.stage{border-top:none;border-left:1px solid var(--line)}}
   canvas{width:100%;max-width:520px;height:auto;display:block}
 
   .tempo{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
@@ -210,13 +210,6 @@
   </div>
 
   <main class="card">
-    <section class="stage">
-      <div class="reps" id="repWrap"><div class="repnum" id="repNum">0</div><div class="replbl" id="repLbl">reps</div></div>
-      <div class="tempo"><div class="ring"><i id="ringI"></i><b></b></div><div class="tempolbl" id="tempolbl">Tempo</div></div>
-      <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
-      <div class="exno" id="exno"></div>
-    </section>
-
     <section class="info">
       <div class="focus" id="exFocus"></div>
       <h2 id="exName"></h2>
@@ -224,6 +217,13 @@
       <div class="setup" id="exSetup"></div>
       <div class="load" id="exLoad"></div>
       <ol class="steps" id="steps"></ol>
+    </section>
+
+    <section class="stage">
+      <div class="reps" id="repWrap"><div class="repnum" id="repNum">0</div><div class="replbl" id="repLbl">reps</div></div>
+      <div class="tempo"><div class="ring"><i id="ringI"></i><b></b></div><div class="tempolbl" id="tempolbl">Tempo</div></div>
+      <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
+      <div class="exno" id="exno"></div>
     </section>
 
     <div class="controls">

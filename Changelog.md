@@ -14,3 +14,4 @@
 - Ensured the Pilates Straps category is selected by default when loading the page.
 - Adjusted CSS (`.exsel`) so both dropdowns fit side-by-side cleanly.
 - Moved the "Print / Save PDF" button from the top navigation area to the bottom of the page, centered in its own wrapper.
+- Swapped the order of the `.stage` (animation) and `.info` (exercise details) sections in the layout, and adjusted their CSS borders to maintain correct visual separation.
