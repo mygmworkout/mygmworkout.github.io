@@ -560,7 +560,6 @@
         gap: 14px;
         padding: 15px;
         background: #00000022;
-        border-top: 1px solid var(--line)
       }
 
       .ctl {
@@ -666,7 +665,8 @@
         justify-content: center;
         gap: 14px;
         padding: 0 16px 14px;
-        background: #00000022
+        background: #00000022;
+        border-bottom: 1px solid var(--line);
       }
 
       .stepper {
@@ -1173,34 +1173,6 @@
     </div>
 
     <main class="card">
-      <section class="info">
-        <div class="focus" id="exFocus"></div>
-        <h2 id="exName"></h2>
-        <p class="sub" id="exSub"></p>
-        <div class="setup" id="exSetup"></div>
-        <div class="load" id="exLoad"></div>
-        <ol class="steps" id="steps"></ol>
-      </section>
-
-      <section class="stage">
-        <div class="reps" id="repWrap">
-          <svg class="rest-svg" viewBox="0 0 100 100" id="restSvg">
-            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5" />
-            <circle cx="50" cy="50" r="44" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="276.5"
-              stroke-dashoffset="0" stroke-linecap="round" id="restCircle"
-              style="transition:stroke-dashoffset 1s linear;" />
-          </svg>
-          <div class="repnum" id="repNum">0</div>
-          <div class="replbl" id="repLbl">reps</div>
-        </div>
-        <div class="tempo">
-          <div class="ring"><i id="ringI"></i><b></b></div>
-          <div class="tempolbl" id="tempolbl">Tempo</div>
-        </div>
-        <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
-        <div class="exno" id="exno"></div>
-      </section>
-
       <div class="controls">
         <button class="ctl" id="sound" aria-label="Toggle rep count sound"><svg id="soundicon" viewBox="0 0 24 24">
             <path d="M3 9v6h4l5 5V4L7 9H3z" />
@@ -1234,6 +1206,34 @@
         <div class="stepper"><span class="pk">Voice</span><select id="voiceSel" class="vsel"
             aria-label="Coach voice"></select></div>
       </div>
+
+      <section class="info">
+        <div class="focus" id="exFocus"></div>
+        <h2 id="exName"></h2>
+        <p class="sub" id="exSub"></p>
+        <div class="setup" id="exSetup"></div>
+        <div class="load" id="exLoad"></div>
+        <ol class="steps" id="steps"></ol>
+      </section>
+
+      <section class="stage">
+        <div class="reps" id="repWrap">
+          <svg class="rest-svg" viewBox="0 0 100 100" id="restSvg">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5" />
+            <circle cx="50" cy="50" r="44" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="276.5"
+              stroke-dashoffset="0" stroke-linecap="round" id="restCircle"
+              style="transition:stroke-dashoffset 1s linear;" />
+          </svg>
+          <div class="repnum" id="repNum">0</div>
+          <div class="replbl" id="repLbl">reps</div>
+        </div>
+        <div class="tempo">
+          <div class="ring"><i id="ringI"></i><b></b></div>
+          <div class="tempolbl" id="tempolbl">Tempo</div>
+        </div>
+        <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
+        <div class="exno" id="exno"></div>
+      </section>
     </main>
 
     <details class="note" id="strapNote">

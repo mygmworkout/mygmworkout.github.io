@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Swapped the order of the `.stage` (animation) and `.info` (exercise details) sections in the layout, and adjusted their CSS borders to maintain correct visual separation.
 - Moved the "Print / Save PDF" button from the top navigation area to the bottom of the page, centered in its own wrapper.
 - Adjusted CSS (`.exsel`) so both dropdowns fit side-by-side cleanly.
+- Moved the global `.controls`, `.pacebar`, and `.setbar` to the very top of the exercise card (above the info section) for easier access.
 - Replaced the horizontal exercise chips (`.rail`) and category tabs (`.tabs`) with a streamlined dropdown menu system.
 - Disabled auto-play on initial page load and when changing exercise categories.
 - Updated main heading brand name to "GM 1".
