@@ -41,22 +41,12 @@
   .spec span{font-size:11.5px;font-weight:600;color:var(--ink);background:#ffffff0d;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
   .spec b{color:var(--accent-ink);font-weight:700}
 
-  /* tabs */
-  .tabs{display:flex;gap:6px;justify-content:center;margin:22px auto 0;background:#ffffff0a;border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%}
-  .tab{cursor:pointer;border:0;background:transparent;color:var(--muted);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:999px;transition:.2s;white-space:nowrap}
-  .tab.active{background:var(--accent);color:#1a120b}
-
-  /* rail */
-  .rail{display:flex;gap:8px;overflow-x:auto;padding:16px 4px 8px;scrollbar-width:none;scroll-snap-type:x proximity}
-  .rail::-webkit-scrollbar{display:none}
-  .chip{flex:0 0 auto;scroll-snap-align:start;cursor:pointer;border:1px solid var(--line);background:#ffffff0a;
-    border-radius:999px;padding:9px 15px 9px 11px;display:flex;align-items:center;gap:9px;
-    font-size:13px;font-weight:600;color:var(--ink);transition:.22s;white-space:nowrap}
-  .chip .n{font-family:"Fraunces",serif;font-size:12px;width:22px;height:22px;border-radius:50%;
-    display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink)}
-  .chip:hover{transform:translateY(-1px)}
-  .chip.active{background:var(--ink);color:#15170f;border-color:var(--ink)}
-  .chip.active .n{background:var(--accent);color:#15170f}
+  /* dropdown */
+  .exsel{background:#ffffff0a;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:9px 32px 9px 16px;
+    font-size:14px;font-weight:600;font-family:inherit;width:100%;max-width:240px;cursor:pointer;outline:none;
+    appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239a9683%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat:no-repeat;background-position:right 14px top 50%;background-size:10px auto;}
+  .exsel option, .exsel optgroup{color:#111;font-weight:500;}
 
   .note{max-width:1100px;margin:18px auto 0;background:linear-gradient(180deg,#1b2016,#14180f);border:1px solid var(--line);border-radius:18px;padding:0;overflow:hidden}
   .note .nh{color:var(--accent-ink);font-family:"Fraunces",serif;font-size:16px;padding:15px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none}
@@ -147,7 +137,7 @@
   footer b{color:var(--accent-ink);font-weight:600}
 
   /* tab row + print button */
-  .tabwrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:22px}
+  .tabwrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:22px auto 16px}
   .pbtn{cursor:pointer;border:1px solid var(--line);background:#ffffff0a;color:var(--ink);font-weight:600;
     font-size:12.5px;padding:9px 15px;border-radius:999px;transition:.2s}
   .pbtn:hover{background:#ffffff18;transform:translateY(-1px)}
@@ -171,7 +161,7 @@
     @page{margin:13mm}
     body{background:#fff!important;color:#1d1b15;padding:0}
     body::before{display:none}
-    header,.tabwrap,.rail,#strapNote,.card,footer{display:none!important}
+    header,.tabwrap,#strapNote,.card,footer{display:none!important}
     #printSheet{display:block}
   }
   .pwrap{font-family:"Hanken Grotesk",sans-serif;color:#1d1b15}
@@ -211,15 +201,10 @@
   </header>
 
   <div class="tabwrap">
-    <div class="tabs">
-      <button class="tab active" data-cat="cable">Cable Strength</button>
-      <button class="tab" data-cat="strap">Pilates Straps</button>
-      <button class="tab" data-cat="stretch">Stretch &amp; Mobility</button>
-    </div>
+    <select id="catSelect" class="exsel" aria-label="Select Category"></select>
+    <select id="exerciseSelect" class="exsel" aria-label="Select Exercise"></select>
     <button id="printBtn" class="pbtn" title="Print or save a PDF of every exercise">⤓ Print / Save PDF</button>
   </div>
-
-  <nav class="rail" id="rail" aria-label="Exercises"></nav>
 
   <main class="card">
     <section class="stage">
@@ -597,7 +582,7 @@ function scene(ex,P){
   if(a1){ if(ex.strap){disc(a1,7,PAL.strap);disc(a1,3,PAL.strapIn);} else disc(a1,6.5,PAL.grip); }
 }
 
-let idx=0, cat="cable", playing=true, t0=performance.now(), curStep=0, stepAcc=0;
+let idx=7, cat="strap", playing=true, t0=performance.now(), curStep=0, stepAcc=0;
 let lastP=0,lastNow=0;
 
 function visible(){ return EX.map((e,i)=>({e,i})).filter(x=>x.e.cat===cat); }
@@ -678,13 +663,37 @@ function renderPrintSheet(){
   document.getElementById("printSheet").innerHTML=html;
 }
 
-function renderChips(){
-  const rail=document.getElementById("rail");rail.innerHTML="";
-  visible().forEach(({e,i},n)=>{
-    const c=document.createElement("button");c.className="chip"+(i===idx?" active":"");
-    c.innerHTML=`<span class="n">${n+1}</span>${e.name}`;
-    c.onclick=()=>go(i);rail.appendChild(c);
+const CATS = [["strap","Pilates Straps"],["cable","Cable Strength"],["stretch","Stretch & Mobility"]];
+function renderDropdowns(){
+  const catSel=document.getElementById("catSelect");
+  const exSel=document.getElementById("exerciseSelect");
+  if(!catSel || !exSel) return;
+  
+  if(!catSel.options.length){
+    CATS.forEach(([c,label])=>{
+      const opt=document.createElement("option");
+      opt.value=c; opt.textContent=label;
+      catSel.appendChild(opt);
+    });
+    catSel.onchange=(e)=>{
+      const first=EX.findIndex(ex=>ex.cat===e.target.value);
+      go(first);
+    };
+  }
+  catSel.value=cat;
+  
+  exSel.innerHTML="";
+  let n=1;
+  EX.forEach((e,i)=>{
+    if(e.cat===cat){
+      const opt=document.createElement("option");
+      opt.value=i; opt.textContent=`${n}. ${e.name}`;
+      if(i===idx) opt.selected=true;
+      exSel.appendChild(opt);
+      n++;
+    }
   });
+  exSel.onchange=(e)=>go(parseInt(e.target.value));
 }
 
 /* ---- guided audio: announce → 3·2·1 count-in → count reps to target → complete ---- */
@@ -870,17 +879,10 @@ function startSequence(fresh){
 
 function go(i){
   idx=i; lastP=0; t0=performance.now();
-  renderChips(); renderInfo(); startSequence(true);
+  cat=EX[idx].cat;
+  renderDropdowns(); renderInfo(); startSequence(true);
 }
 
-function setCat(c){
-  cat=c;
-  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.cat===c));
-  const first=EX.findIndex(e=>e.cat===c);
-  go(first);
-}
-
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setCat(t.dataset.cat));
 document.getElementById("prev").onclick=()=>{const v=visible();let n=v.findIndex(x=>x.i===idx);n=(n-1+v.length)%v.length;go(v[n].i);};
 document.getElementById("next").onclick=()=>{const v=visible();let n=v.findIndex(x=>x.i===idx);n=(n+1)%v.length;go(v[n].i);};
 document.getElementById("play").onclick=()=>{
@@ -926,7 +928,7 @@ document.addEventListener("keydown",e=>{
   else if(e.key===" "){e.preventDefault();document.getElementById("play").click();}
 });
 
-fit(); renderChips(); renderInfo(); renderPrintSheet(); startSequence(true); requestAnimationFrame(frame);
+fit(); renderDropdowns(); renderInfo(); renderPrintSheet(); startSequence(true); requestAnimationFrame(frame);
 </script>
 </body>
 </html>
