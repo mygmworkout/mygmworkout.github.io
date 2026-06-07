@@ -1468,7 +1468,19 @@
       if (P.hi && P.sh) {
         const tdx = P.sh[0] - P.hi[0], tdy = P.sh[1] - P.hi[1];
         const tLen = Math.hypot(tdx, tdy);
-        if(tLen > 0) { fx = -tdy / tLen; fy = tdx / tLen; }
+        if(tLen > 0) { 
+          fx = -tdy / tLen; 
+          fy = tdx / tLen; 
+          
+          let dot = 0;
+          if (P.kn) dot = (P.kn[0] - P.hi[0]) * fx + (P.kn[1] - P.hi[1]) * fy;
+          
+          if (Math.abs(dot) < 5 && P.ha) {
+            dot = (P.ha[0] - P.sh[0]) * fx + (P.ha[1] - P.sh[1]) * fy;
+          }
+          
+          if (dot < -0.1) { fx = -fx; fy = -fy; }
+        }
       }
 
       const drawShoe = (kn, fo, col) => {
