@@ -5,9 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Speediance Gym Monster 1 — Cable & Pilates Strap Exercises</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speediance Gym Monster 1 — Cable & Pilates Strap Exercises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pageloader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s ease;pointer-events:none;}
+  .pageloader .spinner{width:48px;height:48px;border:4px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
+  .pageloader .plabel{margin-top:20px;color:var(--accent);font-family:"Fraunces",serif;letter-spacing:0.15em;font-size:16px;text-transform:uppercase;}
   :root{
     --bg:#10130f; --panel:#191d15; --panel2:#13160f;
     --ink:#ece6d6; --muted:#9a9683; --line:#ffffff14;
@@ -75,9 +86,10 @@
   canvas{width:100%;max-width:520px;height:auto;display:block}
 
   .tempo{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
-  .reps{position:absolute;left:14px;top:12px;display:flex;flex-direction:column;align-items:center;gap:1px;z-index:2}
-  .repnum{font-family:"Fraunces",serif;font-size:32px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
-  .replbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .reps{position:absolute;left:14px;top:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;z-index:2;min-width:70px;min-height:70px;}
+  .rest-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);width:80px;height:80px;opacity:0;transition:opacity 0.3s;pointer-events:none;}
+  .repnum{font-family:"Fraunces",serif;font-size:32px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;position:relative;z-index:2}
+  .replbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;position:relative;z-index:2}
   .ring{width:42px;height:42px;display:grid;place-items:center;position:relative}
   .ring i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:.85;transition:transform .08s linear}
   .ring b{width:8px;height:8px;border-radius:50%;background:var(--accent)}
@@ -113,28 +125,25 @@
   .play:hover{background:var(--accent-ink)}
   .play svg{width:22px;height:22px}
 
-  .pacebar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px 16px;background:#00000022}
-  .pacebar .pk{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .pacebar .pv{font-family:"Fraunces",serif;font-size:15px;color:var(--accent-ink);min-width:42px}
+  .pacebar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 16px 14px;background:#00000022}
+  .pk{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pacebar .pv{font-family:"Fraunces",serif;font-size:14px;color:var(--accent-ink);min-width:38px}
   .pacebar input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:3px;
-    background:linear-gradient(90deg,var(--accent),#ffffff22);width:min(260px,52vw);outline:none}
-  .pacebar input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:linear-gradient(90deg,var(--accent),#ffffff22);width:min(220px,50vw);outline:none}
+  .pacebar input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
     background:var(--accent);border:3px solid #1a1d14;cursor:pointer}
-  .pacebar input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
+  .pacebar input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
     background:var(--accent);border:3px solid #1a1d14;cursor:pointer}
 
-  .setbar{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;padding:0 16px 18px;background:#00000022}
-  .stepper{display:flex;align-items:center;gap:9px}
-  .sbtn{cursor:pointer;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
-    background:#ffffff0a;color:var(--ink);font-size:18px;line-height:1;display:grid;place-items:center;transition:.15s}
+  .setbar{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;padding:0 16px 14px;background:#00000022}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .sbtn{cursor:pointer;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);
+    background:#ffffff0a;color:var(--ink);font-size:15px;line-height:1;display:grid;place-items:center;transition:.15s}
   .sbtn:hover{background:#ffffff18}
-  .stepper .sv{font-family:"Fraunces",serif;font-size:16px;color:var(--accent-ink);min-width:36px;text-align:center}
-  .vsel{background:#ffffff0a;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;
-    font-size:12.5px;font-family:inherit;max-width:160px}
+  .stepper .sv{font-family:"Fraunces",serif;font-size:15px;color:var(--accent-ink);min-width:30px;text-align:center}
+  .vsel{background:#ffffff0a;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 6px;
+    font-size:11.5px;font-family:inherit;max-width:140px}
   .vsel option{color:#111}
-
-  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:20px;padding:0 10px;max-width:60ch;margin-left:auto;margin-right:auto}
-  footer b{color:var(--accent-ink);font-weight:600}
 
   /* tab row */
   .tabwrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:22px auto 16px}
@@ -185,19 +194,47 @@
   .pcard ol li{font-size:11px;margin:2.5px 0;color:#222}
   .pdisc{font-size:10px;color:#888;margin-top:14px;border-top:1px solid #00000018;padding-top:8px}
   @media(max-width:600px){
-    body { padding: 12px 8px 30px; }
-    .setup { grid-template-columns: 1fr; }
-    .setbar { flex-direction: column; gap: 14px; align-items: stretch; }
-    .stepper { justify-content: space-between; }
-    .vsel { max-width: none; flex: 1; margin-left: 10px; }
-    .tabwrap { flex-direction: column; align-items: stretch; }
+    body { padding: 6px 4px 20px; }
+    header { padding: 2px 4px 10px; }
+    header h1 { font-size: 26px; }
+    .tabwrap { margin: 8px auto 10px; gap: 6px; flex-direction: column; align-items: stretch; }
+    .exsel { max-width: 100%; padding: 7px 28px 7px 12px; }
+    .info { padding: 12px 14px 8px; }
+    h2 { font-size: 22px; margin: 0; }
+    .sub { font-size: 13px; margin: 4px 0 10px; }
+    .setup { grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .setup div { padding: 6px 8px; }
+    .setup .k { font-size: 9px; }
+    .setup .v { font-size: 11px; }
+    .load { padding: 8px 10px; margin-bottom: 10px; gap: 8px; }
+    .load .lv { font-size: 16px; }
+    .steps li { font-size: 13px; padding: 6px 6px 6px 36px; }
+    .steps li::before { top: 6px; width: 22px; height: 22px; font-size: 11px; }
+    .stage { padding: 8px; }
+    .reps { left: 8px; top: 8px; min-width: 50px; min-height: 50px; }
+    .repnum { font-size: 26px; }
+    .rest-svg { width: 60px; height: 60px; }
+    .tempo { right: 8px; top: 8px; }
+    .ring { width: 36px; height: 36px; }
+    .controls { padding: 8px; gap: 10px; }
+    .ctl { width: 40px; height: 40px; }
+    .play { width: 50px; height: 50px; }
+    .pacebar { padding: 0 10px 10px; gap: 8px; }
+    .setbar { flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 0 10px 12px; }
+    .stepper { flex: 0 0 calc(50% - 5px); justify-content: space-between; }
+    .sbtn { width: 28px; height: 28px; }
+    .stepper .sv { min-width: 30px; font-size: 15px; }
+    .vsel { flex: 1; max-width: none; margin-left: 6px; padding: 4px; font-size: 11px; }
     .printwrap { padding: 0 8px; }
-    .exsel { max-width: 100%; }
     .pbtn { width: 100%; }
   }
 </style>
 </head>
 <body>
+<div id="pageLoader" class="pageloader">
+  <div class="spinner"></div>
+  <div class="plabel">Loading</div>
+</div>
 <div class="app">
   <header>
     <div class="brand">GM 1</div>
@@ -220,7 +257,14 @@
     </section>
 
     <section class="stage">
-      <div class="reps" id="repWrap"><div class="repnum" id="repNum">0</div><div class="replbl" id="repLbl">reps</div></div>
+      <div class="reps" id="repWrap">
+        <svg class="rest-svg" viewBox="0 0 100 100" id="restSvg">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="276.5" stroke-dashoffset="0" stroke-linecap="round" id="restCircle" style="transition:stroke-dashoffset 1s linear;"/>
+        </svg>
+        <div class="repnum" id="repNum">0</div>
+        <div class="replbl" id="repLbl">reps</div>
+      </div>
       <div class="tempo"><div class="ring"><i id="ringI"></i><b></b></div><div class="tempolbl" id="tempolbl">Tempo</div></div>
       <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
       <div class="exno" id="exno"></div>
@@ -244,10 +288,6 @@
       <div class="stepper"><span class="pk">Voice</span><select id="voiceSel" class="vsel" aria-label="Coach voice"></select></div>
     </div>
   </main>
-
-  <footer>
-    Start light and dial resistance in 1 lb steps; use <b>Eccentric</b> or <b>Chain</b> mode to progress on strength lifts. For Pilates, work in <b>Free Lift · Constant</b> and match the spring weights shown above each move. <b>This is general fitness guidance, not medical advice</b> — check with a professional before starting a new program.
-  </footer>
 
   <details class="note" id="strapNote">
     <summary class="nh">Pilates on the GM1 — the Free Lift workaround</summary>
@@ -595,18 +635,37 @@ let lastP=0,lastNow=0;
 
 function visible(){ return EX.map((e,i)=>({e,i})).filter(x=>x.e.cat===cat); }
 
+function setPhase(newPhase) {
+  phase = newPhase;
+  const collapse = (phase === "counting" || phase === "countin");
+  const infoEl = document.querySelector(".info");
+  const paceEl = document.querySelector(".pacebar");
+  const setEl = document.querySelector(".setbar");
+  if(infoEl) infoEl.style.display = collapse ? "none" : "block";
+  if(paceEl) paceEl.style.display = collapse ? "none" : "flex";
+  if(setEl) setEl.style.display = collapse ? "none" : "flex";
+}
+
 function frame(now){
   const ex=EX[idx];
+  const animPeriod = intervalMs / 1000;
   const dt=(now-t0)/1000;
-  let p = playing ? ((dt/ex.period)%1) : lastP;
+  let p = lastP;
+  if (playing) {
+    if (phase === "countin") {
+      p = 0; // Freeze at the start of the movement during 3-2-1
+    } else {
+      p = (dt / animPeriod) % 1;
+    }
+  }
   if(playing) lastP=p;
   const P=joints(ex,p), t=tphase(ex,p);
   scene(ex,P);
   document.getElementById("ringI").style.transform=`scale(${0.5+0.55*t})`;
   document.getElementById("tempolbl").textContent = ex.cat==="stretch" ? (t>0.5?"Deepen":"Ease") : (ex.strap ? (t>0.5?"Press":"Return") : (t>0.5?"Lift":"Lower"));
-  if(playing){
+  if(playing && phase !== "intro" && phase !== "countin"){
     stepAcc += (now-(lastNow||now));
-    if(stepAcc > ex.period*1000){ stepAcc=0; curStep=(curStep+1)%ex.steps.length; markStep(); }
+    if(stepAcc > animPeriod*1000){ stepAcc=0; curStep=(curStep+1)%ex.steps.length; markStep(); }
   }
   lastNow=now;
   requestAnimationFrame(frame);
@@ -706,7 +765,7 @@ function renderDropdowns(){
   exSel.onchange=(e)=>go(parseInt(e.target.value));
 }
 
-/* ---- guided audio: announce → 3·2·1 count-in → count reps to target → complete ---- */
+/* ---- guided audio ---- */
 const TARGET = {
   pulldown:12,row:12,press:12,curl:15,pushdown:15,squat:12,rdl:10,
   footwork:12,circles:8,scissors:10,slstretch:10,hundred:10,armpull:10,
@@ -744,13 +803,13 @@ function rankVoice(v){
   const n=(v.name||"").toLowerCase(); let s=0;
   if(/^en/i.test(v.lang)) s+=10; else s-=40;
   if(/en[-_]us/i.test(v.lang)) s+=4;
-  if(/natural|neural|enhanced|premium/.test(n)) s+=40;   // modern high-quality voices
+  if(/natural|neural|enhanced|premium/.test(n)) s+=40;
   if(/\bsiri\b/.test(n)) s+=34;
   if(/google/.test(n)) s+=26;
   if(/samantha|ava|allison|serena|zoe|nova|aria|jenny|sonia|libby|guy|evan|noah|emma|joanna|matilda/.test(n)) s+=20;
   if(/online/.test(n) && /microsoft/.test(n)) s+=16;
   if(v.localService===false) s+=4;
-  if(/zira|david|mark|hazel|fred|albert|compact|espeak|e-speak/.test(n)) s-=25;  // robotic defaults
+  if(/zira|david|mark|hazel|fred|albert|compact|espeak|e-speak/.test(n)) s-=25;
   return s;
 }
 function pickVoice(){
@@ -781,9 +840,16 @@ function makeUtter(text){
   u.rate=0.98; u.pitch=1; u.volume=1;
   return u;
 }
-function say(text, isNumber){
+function say(text, isNumber, rate){
   if(!soundOn || !unlocked) return;
-  if("speechSynthesis" in window){ try{ speechSynthesis.speak(makeUtter(text)); return; }catch(e){} }
+  if("speechSynthesis" in window){ 
+    try{ 
+      const u = makeUtter(text);
+      if(rate) u.rate = rate;
+      speechSynthesis.speak(u); 
+      return; 
+    }catch(e){} 
+  }
   if(isNumber) beep();
 }
 function setRepText(t){ const el=document.getElementById("repNum"); if(el) el.textContent=t; }
@@ -791,21 +857,28 @@ function setRepLbl(t){ const el=document.getElementById("repLbl"); if(el) el.tex
 function updateRepUI(){ setRepText(repCount); }
 function clearReps(){ if(repTimer){clearInterval(repTimer); repTimer=null;} }
 
-function buildIntro(ex){
-  const s=ex.setup, L=LOAD[ex.id], parts=[ex.name+"."];
+function buildIntroQueue(ex) {
+  const s=ex.setup, L=LOAD[ex.id], q=[];
+  q.push({ text: ex.name+"." });
   const bits=[];
   if(s.Height && s.Height!=="—") bits.push(s.Height);
   if(s.Attach) bits.push(s.Attach);
   if(s.Mode) bits.push(s.Mode);
-  if(bits.length) parts.push("Setup: "+bits.join(", ")+".");
-  if(L) parts.push("Resistance about "+L.perSide[0]+" to "+L.perSide[1]+" pounds per side"+(L.cables>1?", "+(L.perSide[0]*L.cables)+" to "+(L.perSide[1]*L.cables)+" pounds total.":".")+(L.spring?" "+L.spring+" spring.":""));
-  parts.push("How to move.");
-  ex.steps.forEach(st=>parts.push(st));
-  parts.push(ex.cat==="stretch"
+  if(bits.length) q.push({ text: "Setup: "+bits.join(", ")+"." });
+  if(L) q.push({ text: "Resistance about "+L.perSide[0]+" to "+L.perSide[1]+" pounds per side"+(L.cables>1?", "+(L.perSide[0]*L.cables)+" to "+(L.perSide[1]*L.cables)+" pounds total.":".")+(L.spring?" "+L.spring+" spring.":"") });
+  
+  q.push({ text: "How to move.", onStart: () => { curStep = -1; markStep(); } });
+  
+  ex.steps.forEach((st, i) => {
+    q.push({ text: st, onStart: () => { curStep = i; markStep(); } });
+  });
+  
+  q.push({ text: ex.cat==="stretch"
     ? (totalSets+" hold"+(totalSets>1?"s":"")+" of "+targetOf(ex)+" breaths.")
-    : (totalSets+" set"+(totalSets>1?"s":"")+" of "+targetOf(ex)+" reps."));
-  parts.push("Get ready.");
-  return parts.join(" ");
+    : (totalSets+" set"+(totalSets>1?"s":"")+" of "+targetOf(ex)+" reps.") 
+  });
+  q.push({ text: "Get ready." });
+  return q;
 }
 
 function stopSequence(){
@@ -813,33 +886,50 @@ function stopSequence(){
   if("speechSynthesis" in window){ try{speechSynthesis.cancel();}catch(e){} }
 }
 
-function doTick(token){
-  if(token!==seq || !playing){ clearReps(); return; }
-  repCount++; updateRepUI(); say(repCount,true);
-  if(repCount>=target){
-    clearReps();
-    setTimeout(()=>{ if(token===seq && playing) finishSet(token); }, intervalMs);
-  }
-}
-function startTicking(token){
-  clearReps(); if(!playing) return;
-  repTimer=setInterval(()=>doTick(token), intervalMs);
-}
 function beginCounting(token){
   if(token!==seq || !playing) return;
-  phase="counting"; repCount=0; updateRepUI();
+  setPhase("counting"); repCount=0; updateRepUI();
   setRepLbl((EX[idx].cat==="stretch"?"hold ":"set ")+curSet+"/"+totalSets+" · of "+target);
-  doTick(token);                       // first count right after "Go"
-  if(repCount<target) startTicking(token);
+  t0 = performance.now();
+  if(repCount<target) {
+    repTimer=setInterval(()=>{
+      if(token!==seq || !playing){ clearReps(); return; }
+      repCount++; updateRepUI(); say(repCount,true);
+      if(repCount>=target){
+        clearReps();
+        setTimeout(()=>{ if(token===seq && playing) finishSet(token); }, intervalMs);
+      }
+    }, intervalMs);
+  }
 }
 function countIn(token,i){
   if(token!==seq || !playing) return;
-  phase="countin";
+  setPhase("countin");
   if(i<COUNTIN.length){
-    setRepText(COUNTIN[i]); say(COUNTIN[i]);
-    setTimeout(()=>countIn(token,i+1), 1000);
+    setRepText(COUNTIN[i]); 
+    if(soundOn && unlocked && "speechSynthesis" in window) {
+      try {
+        const u = makeUtter(COUNTIN[i]);
+        u.rate = 1.3;
+        const start = performance.now();
+        const next = () => {
+          if(token!==seq || !playing) return;
+          const elapsed = performance.now() - start;
+          const delay = Math.max(0, 1000 - elapsed);
+          setTimeout(() => countIn(token, i+1), delay);
+        };
+        u.onend = next;
+        u.onerror = next;
+        speechSynthesis.speak(u);
+      } catch(e) {
+        setTimeout(()=>countIn(token,i+1), 1000);
+      }
+    } else {
+      setTimeout(()=>countIn(token,i+1), 1000);
+    }
   } else beginCounting(token);
 }
+
 function finishSet(token){
   if(token!==seq) return;
   const stretch = EX[idx].cat==="stretch";
@@ -849,7 +939,7 @@ function finishSet(token){
     curSet++;
     restThen(token);
   } else {
-    phase="done";
+    setPhase("done");
     setRepLbl("complete");
     const vis=visible(); 
     let n=vis.findIndex(x=>x.i===idx);
@@ -864,30 +954,54 @@ function finishSet(token){
 }
 
 function exRestThen(token, nextIdx){
-  phase="rest";
+  setPhase("rest");
   setRepLbl("rest · next ex");
+  document.getElementById("restSvg").style.opacity="1";
   if(exRestSec>0) say("Rest "+exRestSec+" seconds.");
   let rem=exRestSec;
+  let total=exRestSec>0 ? exRestSec : 1;
   const step=()=>{
-    if(token!==seq || !playing) return;
-    if(rem<=0){ go(nextIdx); return; }
+    if(token!==seq || !playing) { document.getElementById("restSvg").style.opacity="0"; return; }
+    if(rem<=0){ document.getElementById("restSvg").style.opacity="0"; go(nextIdx); return; }
     setRepText(rem);
-    if(rem<=3) say(rem,true);
+    document.getElementById("restCircle").style.strokeDashoffset = 276.5 * (1 - rem/total);
+    if(rem<=3) say(rem,true,1.3);
     rem--; setTimeout(step,1000);
   };
   step();
 }
 
 function restThen(token){
-  phase="rest";
+  setPhase("rest");
   setRepLbl("rest · next set "+curSet+"/"+totalSets);
+  document.getElementById("restSvg").style.opacity="1";
   if(restSec>0) say("Rest "+restSec+" seconds.");
   let rem=restSec;
+  let total=restSec>0 ? restSec : 1;
   const step=()=>{
-    if(token!==seq || !playing) return;
-    if(rem<=0){ setRepText("Go"); say("Go"); beginCounting(token); return; }
+    if(token!==seq || !playing) { document.getElementById("restSvg").style.opacity="0"; return; }
+    if(rem<=0){ 
+      document.getElementById("restSvg").style.opacity="0"; 
+      setRepText("Go"); 
+      if(soundOn && unlocked && "speechSynthesis" in window) {
+        try {
+          const u = makeUtter("Go");
+          u.rate = 1.3;
+          const finish = () => { if(token===seq && playing) beginCounting(token); };
+          u.onend = finish;
+          u.onerror = finish;
+          speechSynthesis.speak(u);
+        } catch(e) {
+          setTimeout(()=>{ if(token===seq && playing) beginCounting(token); }, 500);
+        }
+      } else {
+        setTimeout(()=>{ if(token===seq && playing) beginCounting(token); }, 500);
+      }
+      return; 
+    }
     setRepText(rem);
-    if(rem<=3) say(rem,true);             // spoken count-in for the last 3 seconds
+    document.getElementById("restCircle").style.strokeDashoffset = 276.5 * (1 - rem/total);
+    if(rem<=3) say(rem,true,1.3);
     rem--; setTimeout(step,1000);
   };
   step();
@@ -898,19 +1012,33 @@ function startSequence(fresh){
   const ex=EX[idx];
   target=targetOf(ex);
   setRepLbl((ex.cat==="stretch"?"of "+target+" breaths":"of "+target+" reps"));
-  if(fresh){ repCount=0; curSet=1; phase="idle"; setRepText("0"); }
+  if(fresh){ repCount=0; curSet=1; setPhase("idle"); setRepText("0"); }
   if(!playing) return;
   const token=seq;
   if(soundOn && unlocked){
-    phase="intro";
+    setPhase("intro");
     setRepText("•");
-    const u=makeUtter(buildIntro(ex));
-    u.onend=()=>{ if(token===seq && playing) countIn(token,0); };
-    u.onerror=()=>{ if(token===seq && playing) countIn(token,0); };
-    try{ speechSynthesis.cancel(); speechSynthesis.speak(u); }
-    catch(e){ countIn(token,0); }
+    try { speechSynthesis.cancel(); } catch(e){}
+    
+    const q = buildIntroQueue(ex);
+    
+    function playNext(tok) {
+      if (tok !== seq || !playing) return;
+      if (!q.length) { countIn(tok, 0); return; }
+      
+      const item = q.shift();
+      const u = makeUtter(item.text);
+      if (item.onStart) item.onStart();
+      
+      u.onend = () => playNext(tok);
+      u.onerror = () => playNext(tok);
+      try { speechSynthesis.speak(u); } catch(e) { playNext(tok); }
+    }
+    
+    playNext(token);
+    
   } else {
-    beginCounting(token);              // muted/locked: count visually, no intro
+    countIn(token,0);
   }
 }
 
@@ -948,10 +1076,10 @@ document.getElementById("play").onclick=()=>{
   document.getElementById("playicon").innerHTML=playing?'<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';
   if(playing){
     t0=performance.now()-lastP*EX[idx].period*1000;
-    if(phase==="counting"){ seq++; startTicking(seq); }   // resume the set, no re-intro
-    else startSequence(true);                              // (re)run the guided flow
+    if(phase==="counting"){ seq++; beginCounting(seq); }
+    else startSequence(true);
   } else {
-    stopSequence();                                        // freeze; keep phase & count
+    stopSequence();
   }
 };
 const SPK_ON='<path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
@@ -965,7 +1093,6 @@ document.getElementById("sound").onclick=()=>{
 document.getElementById("paceRange").oninput=(e)=>{
   const v=parseFloat(e.target.value); intervalMs=v*1000;
   document.getElementById("paceVal").textContent=v.toFixed(1)+"s";
-  if(phase==="counting" && playing && repTimer){ seq++; startTicking(seq); }  // apply new pace, keep count
 };
 document.getElementById("paceRange").onchange=savePrefs;
 const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -983,7 +1110,6 @@ if(vsel) vsel.onchange=()=>{
   unlockAudio();
   chosenVoice = voices.find(v=>v.name===vsel.value) || chosenVoice;
   savePrefs();
-  if(soundOn && "speechSynthesis" in window){ try{ speechSynthesis.cancel(); speechSynthesis.speak(makeUtter("Three, two, one, go.")); }catch(e){} }
 };
 document.getElementById("printBtn").onclick=()=>window.print();
 document.addEventListener("keydown",e=>{
@@ -992,14 +1118,14 @@ document.addEventListener("keydown",e=>{
   else if(e.key===" "){e.preventDefault();document.getElementById("play").click();}
 });
 
-loadPrefs();
-document.getElementById("setsVal").textContent=totalSets;
-document.getElementById("restVal").textContent=restSec+"s";
-document.getElementById("exRestVal").textContent=exRestSec+"s";
-document.getElementById("paceRange").value=intervalMs/1000;
-document.getElementById("paceVal").textContent=(intervalMs/1000).toFixed(1)+"s";
-document.getElementById("soundicon").innerHTML = soundOn ? SPK_ON : SPK_OFF;
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    const pl = document.getElementById("pageLoader");
+    if(pl) { pl.style.opacity="0"; setTimeout(()=>pl.remove(), 500); }
+  }, 400);
+});
 
+loadPrefs();
 fit(); renderDropdowns(); renderInfo(); renderPrintSheet(); startSequence(true); requestAnimationFrame(frame);
 </script>
 </body>
