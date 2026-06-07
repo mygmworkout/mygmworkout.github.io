@@ -226,7 +226,7 @@
     <div class="controls">
       <button class="ctl" id="sound" aria-label="Toggle rep count sound"><svg id="soundicon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <button class="ctl" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15.5 4 8 12l7.5 8V4z"/></svg></button>
-      <button class="ctl play" id="play" aria-label="Pause"><svg id="playicon" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+      <button class="ctl play" id="play" aria-label="Play"><svg id="playicon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
       <button class="ctl" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M8.5 4 16 12l-7.5 8V4z"/></svg></button>
     </div>
     <div class="pacebar">
@@ -236,7 +236,8 @@
     </div>
     <div class="setbar">
       <div class="stepper"><span class="pk">Sets</span><button class="sbtn" id="setsDn" aria-label="Fewer sets">−</button><span class="sv" id="setsVal">3</span><button class="sbtn" id="setsUp" aria-label="More sets">+</button></div>
-      <div class="stepper"><span class="pk">Rest</span><button class="sbtn" id="restDn" aria-label="Less rest">−</button><span class="sv" id="restVal">15s</span><button class="sbtn" id="restUp" aria-label="More rest">+</button></div>
+      <div class="stepper"><span class="pk">Set Rest</span><button class="sbtn" id="restDn" aria-label="Less rest">−</button><span class="sv" id="restVal">15s</span><button class="sbtn" id="restUp" aria-label="More rest">+</button></div>
+      <div class="stepper"><span class="pk">Ex. Rest</span><button class="sbtn" id="exRestDn" aria-label="Less rest">−</button><span class="sv" id="exRestVal">60s</span><button class="sbtn" id="exRestUp" aria-label="More rest">+</button></div>
       <div class="stepper"><span class="pk">Voice</span><select id="voiceSel" class="vsel" aria-label="Coach voice"></select></div>
     </div>
   </main>
@@ -582,7 +583,7 @@ function scene(ex,P){
   if(a1){ if(ex.strap){disc(a1,7,PAL.strap);disc(a1,3,PAL.strapIn);} else disc(a1,6.5,PAL.grip); }
 }
 
-let idx=7, cat="strap", playing=true, t0=performance.now(), curStep=0, stepAcc=0;
+let idx=7, cat="strap", playing=false, t0=performance.now(), curStep=0, stepAcc=0;
 let lastP=0,lastNow=0;
 
 function visible(){ return EX.map((e,i)=>({e,i})).filter(x=>x.e.cat===cat); }
@@ -676,6 +677,8 @@ function renderDropdowns(){
       catSel.appendChild(opt);
     });
     catSel.onchange=(e)=>{
+      playing=false;
+      document.getElementById("playicon").innerHTML='<path d="M8 5v14l11-7z"/>';
       const first=EX.findIndex(ex=>ex.cat===e.target.value);
       go(first);
     };
@@ -707,7 +710,7 @@ function targetOf(ex){ return TARGET[ex.id] || 10; }
 
 let soundOn=true, unlocked=false, audioCtx=null;
 let seq=0, phase="idle", repCount=0, target=10, intervalMs=3000, repTimer=null;
-let totalSets=3, curSet=1, restSec=15;
+let totalSets=3, curSet=1, restSec=15, exRestSec=60;
 const COUNTIN=["3","2","1","Go"];
 
 function unlockAudio(){
@@ -837,8 +840,31 @@ function finishSet(token){
   } else {
     phase="done";
     setRepLbl("complete");
-    say((stretch?"All holds complete. ":"All "+totalSets+" sets complete. ")+"Exercise complete. Well done.");
+    const vis=visible(); 
+    let n=vis.findIndex(x=>x.i===idx);
+    if(n < vis.length - 1) {
+      const nextIdx = vis[n+1].i;
+      say((stretch?"All holds complete. ":"All "+totalSets+" sets complete. ")+"Next exercise: " + EX[nextIdx].name + ".");
+      exRestThen(token, nextIdx);
+    } else {
+      say((stretch?"All holds complete. ":"All "+totalSets+" sets complete. ")+"Category complete. Well done.");
+    }
   }
+}
+
+function exRestThen(token, nextIdx){
+  phase="rest";
+  setRepLbl("rest · next ex");
+  if(exRestSec>0) say("Rest "+exRestSec+" seconds.");
+  let rem=exRestSec;
+  const step=()=>{
+    if(token!==seq || !playing) return;
+    if(rem<=0){ go(nextIdx); return; }
+    setRepText(rem);
+    if(rem<=3) say(rem,true);
+    rem--; setTimeout(step,1000);
+  };
+  step();
 }
 
 function restThen(token){
@@ -911,10 +937,13 @@ document.getElementById("paceRange").oninput=(e)=>{
 const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
 function setSets(v){ totalSets=clampN(v,1,6); document.getElementById("setsVal").textContent=totalSets; }
 function setRest(v){ restSec=clampN(v,0,90); document.getElementById("restVal").textContent=restSec+"s"; }
+function setExRest(v){ exRestSec=clampN(v,0,180); document.getElementById("exRestVal").textContent=exRestSec+"s"; }
 document.getElementById("setsUp").onclick=()=>setSets(totalSets+1);
 document.getElementById("setsDn").onclick=()=>setSets(totalSets-1);
 document.getElementById("restUp").onclick=()=>setRest(restSec+5);
 document.getElementById("restDn").onclick=()=>setRest(restSec-5);
+document.getElementById("exRestUp").onclick=()=>setExRest(exRestSec+10);
+document.getElementById("exRestDn").onclick=()=>setExRest(exRestSec-10);
 const vsel=document.getElementById("voiceSel");
 if(vsel) vsel.onchange=()=>{
   unlockAudio();

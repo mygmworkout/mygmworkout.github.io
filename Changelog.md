@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Disabled auto-play on initial page load and when changing exercise categories.
+- Added automatic progression to the next exercise in the category once all sets are completed.
+- Introduced an adjustable `Ex. Rest` stepper (defaults to 60s) to manage transition time between exercises.
 - Replaced the horizontal exercise chips (`.rail`) and category tabs (`.tabs`) with a streamlined dropdown menu system.
 - Added a Category dropdown and an Exercise dropdown in `index.html`.
 - Set the default category order to: Pilates Straps, Cable Strength, Stretch & Mobility.
