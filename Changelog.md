@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Delayed the start of the visible Set Rest and Ex. Rest countdown timers (and circular SVG animations) until the voice has fully finished speaking the set completion and rest duration phrases.
 - Explicitly synchronized the final 3-2-1 visual countdown numbers during rest periods to wait for the speech synthesizer's `onend` event, ensuring the text never ticks down faster than the voice can speak them.
 - Replaced the awkward "0" in the rep counter at the beginning of exercises with "Ready" (when idle) and "Go" (when actively starting) for a more intuitive workout flow.
+- Replaced the single-color stick figure with a highly stylized, colored 2D anatomical character (featuring skin tones, a t-shirt, shorts, shoes, and hair) that perfectly integrates with the existing procedural animation engine.
 - Aggressively compressed and optimized the mobile layout (`< 600px`) by reducing padding, margins, font sizes, and control button scales to ensure the entire interface fits entirely on a mobile phone screen without vertical scrolling. Also placed the category and exercise dropdowns side-by-side on mobile.
 - Flawlessly synced the visual exercise steps (`<ol class="steps">`) to dynamically highlight exactly as the voice reads each step aloud during the intro phase.
 - Dynamically collapse the exercise info (`.info`), pacebar, and setbar during active sets *and* rest periods to maintain a clean focus purely on the workout animation. They restore only when previewing or done.

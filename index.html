@@ -1386,10 +1386,12 @@
     const cv = document.getElementById("stage");
     let ctx = cv.getContext("2d");
     const SCREEN_PAL = {
+      skin: "#e5ab83", skin2: "#c28b66", shirt: "#5a8fd6", shirt2: "#426b9e", shorts: "#33372b", shorts2: "#22251c", shoe: "#e8e8e8", shoe2: "#b0b0b0", hair: "#2a1d12",
       body: "#c7cdb4", body2: "#8c9576", steel: "#2b3326", steel2: "#3a4431",
       screen: "#7fd0c0", cable: "#cfd3c0", strap: "#d9a86a", strapIn: "#7a5a32", mat: "#222a1c", grip: "#1c2117", pulleyDot: "#11140d", bg: null, shadow: ".28"
     };
     const PRINT_PAL = {
+      skin: "#b58766", skin2: "#8f674d", shirt: "#3a68a3", shirt2: "#294a73", shorts: "#2c3024", shorts2: "#1c1f17", shoe: "#aaaaaa", shoe2: "#777777", hair: "#1a120b",
       body: "#46533d", body2: "#717d5f", steel: "#c8cdbb", steel2: "#b4bba2",
       screen: "#74b2a4", cable: "#5b6150", strap: "#b0763a", strapIn: "#7a5226", mat: "#d6cbb0", grip: "#2c2a22", pulleyDot: "#8a907c", bg: "#f4efe2", shadow: ".10"
     };
@@ -1443,12 +1445,54 @@
     }
 
     function drawFigure(P) {
-      if (P.kn2) { seg(P.hi, P.kn2, 18, PAL.body2); if (P.fo2) seg(P.kn2, P.fo2, 16, PAL.body2); }
-      if (P.el2) { seg(P.sh, P.el2, 16, PAL.body2); if (P.ha2) seg(P.el2, P.ha2, 14, PAL.body2); }
-      if (P.kn) { seg(P.hi, P.kn, 20, PAL.body); if (P.fo) seg(P.kn, P.fo, 18, PAL.body); }
-      if (P.hi && P.sh) seg(P.hi, P.sh, 22, PAL.body);
-      if (P.el) { seg(P.sh, P.el, 18, PAL.body); if (P.ha) seg(P.el, P.ha, 16, PAL.body); }
-      if (P.he) { seg(P.sh, P.he, 16, PAL.body); disc(P.he, 14, PAL.body); }
+      const limb = (p1, p2, r1, r2, col) => {
+        if (!p1 || !p2) return;
+        const dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+        if (dx * dx + dy * dy < 0.1) { disc(p1, r1, col); return; }
+        const a = Math.atan2(dy, dx);
+        ctx.fillStyle = col; ctx.beginPath();
+        ctx.arc(p1[0], p1[1], r1, a + Math.PI / 2, a - Math.PI / 2);
+        ctx.arc(p2[0], p2[1], r2, a - Math.PI / 2, a + Math.PI / 2);
+        ctx.fill();
+      };
+      
+      const halfLimb = (p1, p2, r1, r2, col) => {
+        if (!p1 || !p2) return;
+        const mid = [p1[0] + (p2[0] - p1[0]) * 0.55, p1[1] + (p2[1] - p1[1]) * 0.55];
+        const midR = r1 + (r2 - r1) * 0.55;
+        limb(p1, mid, r1, midR, col);
+      };
+
+      if (P.kn2) { 
+        limb(P.hi, P.kn2, 11, 7.5, PAL.skin2);
+        halfLimb(P.hi, P.kn2, 12.5, 9.5, PAL.shorts2);
+        if (P.fo2) { limb(P.kn2, P.fo2, 7.5, 4.5, PAL.skin2); disc(P.fo2, 5.5, PAL.shoe2); }
+      }
+      if (P.el2) { 
+        limb(P.sh, P.el2, 8.5, 6.5, PAL.skin2);
+        halfLimb(P.sh, P.el2, 9.5, 8, PAL.shirt2);
+        if (P.ha2) { limb(P.el2, P.ha2, 6.5, 4.5, PAL.skin2); disc(P.ha2, 4.5, PAL.skin2); }
+      }
+      if (P.hi && P.sh) {
+        limb(P.sh, P.hi, 14, 12, PAL.shirt);
+        limb(P.hi, [P.hi[0], P.hi[1] + 5], 13, 12, PAL.shorts);
+      }
+      if (P.he && P.sh) {
+        limb(P.sh, P.he, 6, 6, PAL.skin);
+        disc(P.he, 11, PAL.skin);
+        disc([P.he[0], P.he[1] - 4], 10, PAL.hair);
+        disc([P.he[0] - 4, P.he[1] - 2], 9, PAL.hair);
+      }
+      if (P.kn) { 
+        limb(P.hi, P.kn, 11, 8, PAL.skin);
+        halfLimb(P.hi, P.kn, 12.5, 10, PAL.shorts);
+        if (P.fo) { limb(P.kn, P.fo, 8, 5, PAL.skin); disc(P.fo, 6, PAL.shoe); }
+      }
+      if (P.el) { 
+        limb(P.sh, P.el, 9, 7, PAL.skin);
+        halfLimb(P.sh, P.el, 10, 8.5, PAL.shirt);
+        if (P.ha) { limb(P.el, P.ha, 7, 5, PAL.skin); disc(P.ha, 5, PAL.skin); }
+      }
     }
 
     function joints(ex, p) {
