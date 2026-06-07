@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+- Updated main heading brand name to "GM 1".
+- Removed description text and equipment specifications from the top header for a cleaner UI.
 - Disabled auto-play on initial page load and when changing exercise categories.
 - Added automatic progression to the next exercise in the category once all sets are completed.
 - Introduced an adjustable `Ex. Rest` stepper (defaults to 60s) to manage transition time between exercises.
