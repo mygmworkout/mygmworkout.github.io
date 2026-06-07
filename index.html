@@ -1746,10 +1746,10 @@
       if (/natural|neural|enhanced|premium/.test(n)) s += 40;
       if (/\bsiri\b/.test(n)) s += 34;
       if (/google/.test(n)) s += 26;
-      if (/samantha|ava|allison|serena|zoe|nova|aria|jenny|sonia|libby|guy|evan|noah|emma|joanna|matilda/.test(n)) s += 20;
+      if (/samantha|ava|allison|serena|zoe|nova|aria|jenny|sonia|libby|guy|evan|noah|emma|joanna|matilda|zira|david|mark/.test(n)) s += 20;
       if (/online/.test(n) && /microsoft/.test(n)) s += 16;
       if (v.localService === false) s += 4;
-      if (/zira|david|mark|hazel|fred|albert|compact|espeak|e-speak/.test(n)) s -= 25;
+      if (/hazel|fred|albert|compact|espeak|e-speak/.test(n)) s -= 25;
       return s;
     }
     function pickVoice() {

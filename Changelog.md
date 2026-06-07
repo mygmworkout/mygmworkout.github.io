@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced the single-color stick figure with a highly stylized, colored 2D anatomical character (featuring a face profile, chest, skin tones, t-shirt, shorts, sneakers, and hair) that perfectly integrates with the existing procedural animation engine.
 - Implemented a dynamic normal-vector mathematical solver to automatically flip the face, hair, and anatomy directions on exercises where the character is facing away from the machine (e.g. Standing Punch) or lying face-down (e.g. Breaststroke).
 - Removed the "Pilates on the GM1 — the Free Lift workaround" informational section from the bottom of the page.
+- Heavily prioritized Microsoft Zira, Mark, and David US voices in the speech-synthesis sorting algorithm so they float to the top of the dropdown list on mobile and desktop.
 - Aggressively compressed and optimized the mobile layout (`< 600px`) by reducing padding, margins, font sizes, and control button scales to ensure the entire interface fits entirely on a mobile phone screen without vertical scrolling. Also placed the category and exercise dropdowns side-by-side on mobile.
 - Flawlessly synced the visual exercise steps (`<ol class="steps">`) to dynamically highlight exactly as the voice reads each step aloud during the intro phase.
 - Dynamically collapse the exercise info (`.info`), pacebar, and setbar during active sets *and* rest periods to maintain a clean focus purely on the workout animation. They restore only when previewing or done.
