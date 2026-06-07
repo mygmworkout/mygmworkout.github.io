@@ -1703,7 +1703,7 @@
     }
     function setRepText(t) { const el = document.getElementById("repNum"); if (el) el.textContent = t; }
     function setRepLbl(t) { const el = document.getElementById("repLbl"); if (el) el.textContent = t; }
-    function updateRepUI() { setRepText(repCount); }
+    function updateRepUI() { setRepText(repCount === 0 ? "Go" : repCount); }
     function clearReps() { if (repTimer) { clearInterval(repTimer); repTimer = null; } }
 
     function buildIntroQueue(ex) {
@@ -1950,7 +1950,7 @@
       const ex = EX[idx];
       target = targetOf(ex);
       setRepLbl((ex.cat === "stretch" ? "of " + target + " breaths" : "of " + target + " reps"));
-      if (fresh) { repCount = 0; curSet = 1; setPhase("idle"); setRepText("0"); }
+      if (fresh) { repCount = 0; curSet = 1; setPhase("idle"); setRepText("Ready"); }
       if (!playing) return;
       const token = seq;
       if (soundOn && unlocked) {
