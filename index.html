@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speediance Gym Monster 1 — Cable & Pilates Strap Exercises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10130f; --panel:#191d15; --panel2:#13160f;
+    --ink:#ece6d6; --muted:#9a9683; --line:#ffffff14;
+    --body:#c7cdb4; --body2:#8c9576; --skin:#d7d6c2;
+    --steel:#2b3326; --steel2:#3a4431; --screen:#7fd0c0;
+    --accent:#e08a4f; --accent-ink:#f0a874; --accent-soft:#3a2c1f;
+    --strap:#d9a86a; --cable:#cfd3c0; --mat:#242a1d; --sage:#9bb072;
+    --shadow:0 30px 70px -30px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(130% 80% at 80% -10%, #1d2417 0%, transparent 55%),
+      radial-gradient(120% 90% at 0% 110%, #1a1f13 0%, transparent 50%),
+      var(--bg);
+    background-attachment:fixed;-webkit-font-smoothing:antialiased;line-height:1.5;
+    padding:22px 16px 56px;
+  }
+  .app{max-width:1100px;margin:0 auto}
+
+  header{text-align:center;padding:4px 4px 16px}
+  .brand{font-size:11.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;
+    display:inline-flex;align-items:center;gap:10px}
+  .brand::before,.brand::after{content:"";width:24px;height:1px;background:var(--accent);opacity:.7}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(32px,7.4vw,58px);line-height:1.03;margin:.3em 0 .14em;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--accent-ink)}
+  .lede{max-width:54ch;margin:.2em auto 0;color:var(--muted);font-size:14.5px}
+  .spec{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+  .spec span{font-size:11.5px;font-weight:600;color:var(--ink);background:#ffffff0d;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  .spec b{color:var(--accent-ink);font-weight:700}
+
+  /* tabs */
+  .tabs{display:flex;gap:6px;justify-content:center;margin:22px auto 0;background:#ffffff0a;border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%}
+  .tab{cursor:pointer;border:0;background:transparent;color:var(--muted);font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:999px;transition:.2s;white-space:nowrap}
+  .tab.active{background:var(--accent);color:#1a120b}
+
+  /* rail */
+  .rail{display:flex;gap:8px;overflow-x:auto;padding:16px 4px 8px;scrollbar-width:none;scroll-snap-type:x proximity}
+  .rail::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;scroll-snap-align:start;cursor:pointer;border:1px solid var(--line);background:#ffffff0a;
+    border-radius:999px;padding:9px 15px 9px 11px;display:flex;align-items:center;gap:9px;
+    font-size:13px;font-weight:600;color:var(--ink);transition:.22s;white-space:nowrap}
+  .chip .n{font-family:"Fraunces",serif;font-size:12px;width:22px;height:22px;border-radius:50%;
+    display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink)}
+  .chip:hover{transform:translateY(-1px)}
+  .chip.active{background:var(--ink);color:#15170f;border-color:var(--ink)}
+  .chip.active .n{background:var(--accent);color:#15170f}
+
+  .note{max-width:1100px;margin:18px auto 0;background:linear-gradient(180deg,#1b2016,#14180f);border:1px solid var(--line);border-radius:18px;padding:0;overflow:hidden}
+  .note .nh{color:var(--accent-ink);font-family:"Fraunces",serif;font-size:16px;padding:15px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none}
+  .note .nh::-webkit-details-marker{display:none}
+  .note .nh::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+  .note .nh::after{content:"▸";margin-left:auto;color:var(--muted);font-size:13px;transition:transform .2s}
+  .note[open] .nh::after{transform:rotate(90deg)}
+  .note .notebody{padding:0 18px 16px}
+  .note p{margin:0 0 12px;color:var(--muted);font-size:13.5px}
+  .note b{color:var(--ink);font-weight:600}
+  .springs{display:flex;flex-wrap:wrap;gap:8px}
+  .spring{font-size:12px;font-weight:600;color:var(--ink);border:1px solid var(--line);border-radius:10px;
+    padding:7px 11px;background:#ffffff08;display:flex;align-items:center;gap:8px}
+  .spring::before{content:"";width:10px;height:10px;border-radius:50%}
+  .spring span{font-weight:700}
+  .spring.y::before{background:#e8c34a}.spring.b::before{background:#5a8fd6}.spring.r::before{background:#d65a5a}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
+    border-radius:26px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:1fr}
+  @media(min-width:880px){.card{grid-template-columns:1.05fr .95fr}}
+
+  .stage{position:relative;background:
+      radial-gradient(120% 120% at 35% 12%, #20271a 0%, transparent 60%),
+      linear-gradient(180deg,#191e13,#11140d);
+    padding:14px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+  @media(min-width:880px){.stage{border-bottom:none;border-right:1px solid var(--line)}}
+  canvas{width:100%;max-width:520px;height:auto;display:block}
+
+  .tempo{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
+  .reps{position:absolute;left:14px;top:12px;display:flex;flex-direction:column;align-items:center;gap:1px;z-index:2}
+  .repnum{font-family:"Fraunces",serif;font-size:32px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+  .replbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ring{width:42px;height:42px;display:grid;place-items:center;position:relative}
+  .ring i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:.85;transition:transform .08s linear}
+  .ring b{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .tempolbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  .exno{position:absolute;left:18px;bottom:12px;font-family:"Fraunces",serif;font-size:13px;color:var(--muted);letter-spacing:.08em}
+
+  .info{padding:22px 22px 12px}
+  .focus{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sage);font-weight:700}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,5vw,33px);margin:.16em 0 .1em;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 14px;max-width:44ch}
+  .setup{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .setup div{background:#ffffff0a;border:1px solid var(--line);border-radius:11px;padding:9px 11px}
+  .setup .k{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:2px}
+  .setup .v{font-size:13px;font-weight:600;color:var(--ink)}
+  .setup .v.accent{color:var(--accent-ink)}
+
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;position:relative;padding:10px 6px 10px 42px;border-top:1px solid var(--line);
+    font-size:14px;transition:.3s;border-radius:10px}
+  .steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:6px;top:10px;
+    font-family:"Fraunces",serif;font-size:11.5px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+    background:var(--accent-soft);color:var(--accent-ink);transition:.3s}
+  .steps li.cur{background:#ffffff0d}
+  .steps li.cur::before{background:var(--accent);color:#15170f;transform:scale(1.08)}
+
+  .controls{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:14px;padding:15px;
+    background:#00000022;border-top:1px solid var(--line)}
+  .ctl{cursor:pointer;border:1px solid var(--line);background:#ffffff0a;border-radius:999px;width:46px;height:46px;
+    display:grid;place-items:center;color:var(--ink);transition:.2s}
+  .ctl:hover{transform:translateY(-2px);background:#ffffff18}
+  .ctl svg{width:18px;height:18px;fill:currentColor}
+  .play{width:58px;height:58px;background:var(--accent);color:#15120b;border-color:var(--accent)}
+  .play:hover{background:var(--accent-ink)}
+  .play svg{width:22px;height:22px}
+
+  .pacebar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px 16px;background:#00000022}
+  .pacebar .pk{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pacebar .pv{font-family:"Fraunces",serif;font-size:15px;color:var(--accent-ink);min-width:42px}
+  .pacebar input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:3px;
+    background:linear-gradient(90deg,var(--accent),#ffffff22);width:min(260px,52vw);outline:none}
+  .pacebar input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:var(--accent);border:3px solid #1a1d14;cursor:pointer}
+  .pacebar input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
+    background:var(--accent);border:3px solid #1a1d14;cursor:pointer}
+
+  .setbar{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;padding:0 16px 18px;background:#00000022}
+  .stepper{display:flex;align-items:center;gap:9px}
+  .sbtn{cursor:pointer;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
+    background:#ffffff0a;color:var(--ink);font-size:18px;line-height:1;display:grid;place-items:center;transition:.15s}
+  .sbtn:hover{background:#ffffff18}
+  .stepper .sv{font-family:"Fraunces",serif;font-size:16px;color:var(--accent-ink);min-width:36px;text-align:center}
+  .vsel{background:#ffffff0a;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;
+    font-size:12.5px;font-family:inherit;max-width:160px}
+  .vsel option{color:#111}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:20px;padding:0 10px;max-width:60ch;margin-left:auto;margin-right:auto}
+  footer b{color:var(--accent-ink);font-weight:600}
+
+  /* tab row + print button */
+  .tabwrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:22px}
+  .pbtn{cursor:pointer;border:1px solid var(--line);background:#ffffff0a;color:var(--ink);font-weight:600;
+    font-size:12.5px;padding:9px 15px;border-radius:999px;transition:.2s}
+  .pbtn:hover{background:#ffffff18;transform:translateY(-1px)}
+
+  /* per-side load readout */
+  .load{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 16px;
+    background:#ffffff0a;border:1px solid var(--line);border-radius:13px;padding:11px 14px}
+  .load .lcol{display:flex;flex-direction:column;gap:1px}
+  .load .lk{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .load .lv{font-family:"Fraunces",serif;font-size:18px;color:var(--ink)}
+  .load .lv.accent{color:var(--accent-ink)}
+  .load .lmul{font-family:"Fraunces",serif;font-size:14px;color:var(--muted)}
+  .load .lspring{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--ink);border:1px solid var(--line);
+    border-radius:999px;padding:5px 11px;display:flex;align-items:center;gap:7px}
+  .load .lspring::before{content:"";width:10px;height:10px;border-radius:50%}
+  .load .lspring.y::before{background:#e8c34a}.load .lspring.b::before{background:#5a8fd6}.load .lspring.r::before{background:#d65a5a}
+
+  /* print layout */
+  #printSheet{display:none}
+  @media print{
+    @page{margin:13mm}
+    body{background:#fff!important;color:#1d1b15;padding:0}
+    body::before{display:none}
+    header,.tabwrap,.rail,#strapNote,.card,footer{display:none!important}
+    #printSheet{display:block}
+  }
+  .pwrap{font-family:"Hanken Grotesk",sans-serif;color:#1d1b15}
+  .ptitle{font-family:"Fraunces",serif;font-size:25px;margin:0 0 4px}
+  .pintro{color:#555;font-size:11.5px;margin:0 0 12px;max-width:62ch}
+  .pspringrow{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .pspringrow span{font-size:10.5px;border:1px solid #00000022;border-radius:6px;padding:4px 9px}
+  .pcat{font-family:"Fraunces",serif;font-size:18px;margin:16px 0 8px;border-bottom:1.5px solid #00000022;padding-bottom:5px}
+  .pcard{display:flex;gap:14px;border:1px solid #00000020;border-radius:10px;padding:12px;margin:0 0 9px;
+    break-inside:avoid;page-break-inside:avoid;align-items:flex-start}
+  .pcard img{width:185px;height:auto;border-radius:7px;border:1px solid #00000014;flex:0 0 auto}
+  .pbody{flex:1}
+  .pfocus{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#8a8576;font-weight:700}
+  .pcard h3{font-family:"Fraunces",serif;font-weight:500;font-size:16px;margin:2px 0 4px}
+  .pcard p{font-size:11.5px;color:#444;margin:0 0 8px}
+  .ppills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+  .ppills span{font-size:10px;border:1px solid #00000022;border-radius:5px;padding:3px 8px;color:#333}
+  .ppills .pload{background:#f3e7d6;border-color:#e2c9a6;color:#7a4f25;font-weight:600}
+  .pcard ol{margin:0;padding-left:17px}
+  .pcard ol li{font-size:11px;margin:2.5px 0;color:#222}
+  .pdisc{font-size:10px;color:#888;margin-top:14px;border-top:1px solid #00000018;padding-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">Speediance · Gym Monster 1</div>
+    <h1>Cable &amp; <em>Pilates Strap</em> Exercises</h1>
+    <p class="lede">A complete animated library for the Gym Monster's dual-motor cable system — strength work with handles and bar, plus reformer-style Pilates using the strap accessory and elastic spring mode.</p>
+    <div class="spec">
+      <span><b>220 lb</b> max · 110 lb / arm</span>
+      <span><b>1 lb</b> increments</span>
+      <span><b>10</b> pulley heights</span>
+      <span>Modes: <b>Standard · Eccentric · Chain · Constant</b></span>
+      <span>Pilates: <b>Free Lift · Constant mode</b></span>
+    </div>
+  </header>
+
+  <div class="tabwrap">
+    <div class="tabs">
+      <button class="tab active" data-cat="cable">Cable Strength</button>
+      <button class="tab" data-cat="strap">Pilates Straps</button>
+      <button class="tab" data-cat="stretch">Stretch &amp; Mobility</button>
+    </div>
+    <button id="printBtn" class="pbtn" title="Print or save a PDF of every exercise">⤓ Print / Save PDF</button>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Exercises"></nav>
+
+  <main class="card">
+    <section class="stage">
+      <div class="reps" id="repWrap"><div class="repnum" id="repNum">0</div><div class="replbl" id="repLbl">reps</div></div>
+      <div class="tempo"><div class="ring"><i id="ringI"></i><b></b></div><div class="tempolbl" id="tempolbl">Tempo</div></div>
+      <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
+      <div class="exno" id="exno"></div>
+    </section>
+
+    <section class="info">
+      <div class="focus" id="exFocus"></div>
+      <h2 id="exName"></h2>
+      <p class="sub" id="exSub"></p>
+      <div class="setup" id="exSetup"></div>
+      <div class="load" id="exLoad"></div>
+      <ol class="steps" id="steps"></ol>
+    </section>
+
+    <div class="controls">
+      <button class="ctl" id="sound" aria-label="Toggle rep count sound"><svg id="soundicon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button class="ctl" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15.5 4 8 12l7.5 8V4z"/></svg></button>
+      <button class="ctl play" id="play" aria-label="Pause"><svg id="playicon" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+      <button class="ctl" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M8.5 4 16 12l-7.5 8V4z"/></svg></button>
+    </div>
+    <div class="pacebar">
+      <span class="pk">Rep pace</span>
+      <input type="range" id="paceRange" min="1.5" max="6" step="0.5" value="3" aria-label="Seconds between reps">
+      <span class="pv" id="paceVal">3.0s</span>
+    </div>
+    <div class="setbar">
+      <div class="stepper"><span class="pk">Sets</span><button class="sbtn" id="setsDn" aria-label="Fewer sets">−</button><span class="sv" id="setsVal">3</span><button class="sbtn" id="setsUp" aria-label="More sets">+</button></div>
+      <div class="stepper"><span class="pk">Rest</span><button class="sbtn" id="restDn" aria-label="Less rest">−</button><span class="sv" id="restVal">15s</span><button class="sbtn" id="restUp" aria-label="More rest">+</button></div>
+      <div class="stepper"><span class="pk">Voice</span><select id="voiceSel" class="vsel" aria-label="Coach voice"></select></div>
+    </div>
+  </main>
+
+  <footer>
+    Start light and dial resistance in 1 lb steps; use <b>Eccentric</b> or <b>Chain</b> mode to progress on strength lifts. For Pilates, work in <b>Free Lift · Constant</b> and match the spring weights shown above each move. <b>This is general fitness guidance, not medical advice</b> — check with a professional before starting a new program.
+  </footer>
+
+  <details class="note" id="strapNote">
+    <summary class="nh">Pilates on the GM1 — the Free Lift workaround</summary>
+    <div class="notebody">
+      <p>The automated Pilates tracks don't launch on a Gym Monster 1, so you recreate the reformer by hand. Open the workout menu and choose <b>Free Lift</b>, then switch the lifting mode from Standard to <b>Constant</b> (steady, reformer-like tension) or Chains. Hook the long extension straps and dual-layer loops into the <b>bottom cable ports</b>. For full-range moves like Leg Circles or the Hundred, pull the cables out a few feet first to establish your active tension zone, then dial the weight <b>per side</b> to match the spring your class calls for:</p>
+      <div class="springs">
+        <div class="spring y"><span>Yellow</span> light / support · 4–7 lb</div>
+        <div class="spring b"><span>Blue</span> medium · 10–12 lb</div>
+        <div class="spring r"><span>Red</span> heavy / base · 15–22 lb</div>
+      </div>
+    </div>
+  </details>
+
+  <section id="printSheet" aria-hidden="true"></section>
+</div>
+
+<script>
+const PULLEY = { high:[430,72], mid:[430,150], low:[430,232], floor:[418,250] };
+
+// ---- Exercise library ----
+const EX = [
+/* ============ CABLE STRENGTH ============ */
+{
+  cat:"cable", id:"pulldown", name:"Lat Pulldown", focus:"Back · Lats",
+  sub:"Kneel tall and pull the bar down to your chest, driving the elbows toward your ribs.",
+  setup:{Height:"High pulley",Attach:"Bar / dual handles",Mode:"Standard",Load:"~20–40 lb"},
+  pulley:"high", attach:"ha", period:3, ringFrom:.45,
+  start:{he:[150,118],sh:[150,142],el:[166,112],ha:[183,82],hi:[150,190],kn:[150,236],fo:[118,240]},
+  end:  {he:[150,122],sh:[150,146],el:[150,150],ha:[166,150],hi:[150,190],kn:[150,236],fo:[118,240]},
+  steps:["Set both cables to the highest pulley and clip on the bar.","Kneel tall under the bar, arms reaching up, core braced.","Exhale and pull the bar to your collarbone, elbows down and back.","Squeeze the shoulder blades, then resist the cable back up slowly.","Keep the torso still — no leaning back to cheat the weight."]
+},
+{
+  cat:"cable", id:"row", name:"Seated Cable Row", focus:"Back · Mid-back",
+  sub:"Sit tall with legs long and draw the handles to your waist, leading with the elbows.",
+  setup:{Height:"Mid pulley",Attach:"Rope / handles",Mode:"Standard",Load:"~25–45 lb"},
+  pulley:"mid", attach:"ha", period:3, ringFrom:.45,
+  start:{he:[150,140],sh:[150,162],el:[183,168],ha:[222,172],hi:[150,212],kn:[195,214],fo:[238,216]},
+  end:  {he:[150,140],sh:[150,162],el:[136,166],ha:[170,166],hi:[150,212],kn:[195,214],fo:[238,216]},
+  steps:["Sit facing the rack with a mid-height pulley and feet braced.","Hinge tall with a long spine and arms extended forward.","Exhale and pull the handles to your lower ribs, elbows past your sides.","Pause and squeeze, then control the return without rounding.","Keep shoulders down, away from the ears, throughout."]
+},
+{
+  cat:"cable", id:"press", name:"Standing Chest Press", focus:"Chest · Triceps",
+  sub:"With the cables behind you, press the handles forward until the arms are long.",
+  setup:{Height:"Mid pulley",Attach:"Dual handles",Mode:"Standard",Load:"~20–40 lb/arm"},
+  pulley:"mid", attach:"ha", period:2.6, ringFrom:.5,
+  start:{he:[168,98],sh:[166,122],el:[183,128],ha:[150,126],hi:[164,170],kn:[166,206],fo:[170,250]},
+  end:  {he:[168,98],sh:[166,122],el:[138,124],ha:[108,122],hi:[164,170],kn:[166,206],fo:[170,250]},
+  steps:["Set mid pulleys and face away from the rack, handles at your chest.","Stagger your stance for balance and brace the core.","Exhale and press both handles straight forward to full length.","Stop just short of locking the elbows; feel the chest work.","Resist the cables slowly back to the start."]
+},
+{
+  cat:"cable", id:"curl", name:"Cable Biceps Curl", focus:"Arms · Biceps",
+  sub:"From a low pulley, curl the handles up while pinning the elbows to your sides.",
+  setup:{Height:"Low pulley",Attach:"Handles / bar",Mode:"Standard",Load:"~10–20 lb/arm"},
+  pulley:"low", attach:"ha", period:2.4, ringFrom:.5,
+  start:{he:[160,100],sh:[162,122],el:[162,168],ha:[180,202],hi:[160,172],kn:[160,208],fo:[160,250]},
+  end:  {he:[160,100],sh:[162,122],el:[162,168],ha:[176,134],hi:[160,172],kn:[160,208],fo:[160,250]},
+  steps:["Set low pulleys and stand facing the rack, arms long.","Keep elbows fixed against your ribs the whole set.","Exhale and curl the handles up toward your shoulders.","Squeeze at the top, then lower with control against the cable.","Avoid swinging — let the biceps do the work."]
+},
+{
+  cat:"cable", id:"pushdown", name:"Triceps Pushdown", focus:"Arms · Triceps",
+  sub:"From a high pulley, extend the rope down until the arms are straight.",
+  setup:{Height:"High pulley",Attach:"Rope",Mode:"Standard",Load:"~15–30 lb"},
+  pulley:"high", attach:"ha", period:2.4, ringFrom:.5,
+  start:{he:[156,100],sh:[155,122],el:[160,158],ha:[178,126],hi:[154,172],kn:[156,208],fo:[158,250]},
+  end:  {he:[156,100],sh:[155,122],el:[160,158],ha:[184,196],hi:[154,172],kn:[156,208],fo:[158,250]},
+  steps:["Set a high pulley and clip on the rope; face the rack.","Tuck the elbows to your sides and grip the rope.","Exhale and press the rope down until the arms lock out.","Squeeze the triceps, then resist the cable back to chest height.","Keep the upper arms still — only the forearms move."]
+},
+{
+  cat:"cable", id:"squat", name:"Cable Front Squat", focus:"Legs · Quads & Glutes",
+  sub:"Hold the handles at your shoulders and sit down and up with an upright torso.",
+  setup:{Height:"Low pulley",Attach:"Handles / bar",Mode:"Standard",Load:"~30–60 lb"},
+  pulley:"low", attach:"ha", period:3, ringFrom:.5,
+  start:{he:[158,100],sh:[158,122],el:[172,130],ha:[150,128],hi:[158,172],kn:[160,208],fo:[160,250]},
+  end:  {he:[158,128],sh:[158,150],el:[172,158],ha:[150,156],hi:[160,198],kn:[186,222],fo:[160,250]},
+  steps:["Set low pulleys and hold the handles racked at your shoulders.","Stand tall, feet shoulder-width, chest lifted.","Inhale and sit back and down until thighs near parallel.","Drive through the heels to stand, exhaling at the top.","Keep the torso upright and knees tracking over the toes."]
+},
+{
+  cat:"cable", id:"rdl", name:"Romanian Deadlift", focus:"Posterior chain",
+  sub:"Hinge at the hips with a flat back, lowering the bar along the legs.",
+  setup:{Height:"Floor anchor",Attach:"Bar",Mode:"Standard",Load:"~30–60 lb"},
+  pulley:"floor", attach:"ha", period:3.2, ringFrom:.5,
+  start:{he:[150,100],sh:[150,122],el:[160,150],ha:[166,178],hi:[150,172],kn:[150,208],fo:[150,250]},
+  end:  {he:[196,150],sh:[180,150],el:[186,176],ha:[188,202],hi:[136,178],kn:[150,210],fo:[150,250]},
+  steps:["Anchor the cables low/at the base and grip the bar standing tall.","Soft knees; push the hips back and hinge forward.","Lower the bar along your shins, keeping the back flat.","Feel the hamstrings load, then drive the hips forward to stand.","Squeeze the glutes at the top — don't over-arch."]
+},
+
+/* ============ PILATES STRAPS ============ */
+{
+  cat:"strap", id:"footwork", name:"Footwork / Leg Press", focus:"Reformer · Legs",
+  sub:"Lying on the platform with feet in the straps, press the legs long and float them back.",
+  setup:{Height:"Bottom port",Attach:"Straps + loops (feet)",Mode:"Free Lift · Constant",Load:"Red spring · 15–22 lb/side"},
+  pulley:"low", attach:"fo", attach2:"fo2", period:3.4, ringFrom:.5, strap:true,
+  start:{he:[100,200],sh:[124,206],hi:[178,212],kn:[206,178],fo:[214,202],kn2:[206,188],fo2:[214,212]},
+  end:  {he:[100,200],sh:[124,206],hi:[178,212],kn:[244,196],fo:[290,200],kn2:[244,204],fo2:[290,210]},
+  steps:["Attach the Pilates straps low and lie back with both feet in the loops.","Start with knees bent toward you, heels together, spine neutral.","Exhale and press both legs to nearly straight, controlling the springs.","Inhale and fold the knees back in slowly — don't let them snap.","Keep the pelvis still and the low back gently anchored."]
+},
+{
+  cat:"strap", id:"circles", name:"Leg Circles", focus:"Reformer · Hips & core",
+  sub:"One foot in a strap, draw smooth controlled circles from the hip joint.",
+  setup:{Height:"Bottom port",Attach:"Strap + loop (one foot)",Mode:"Free Lift · Constant",Load:"Yellow spring · 4–7 lb/side"},
+  pulley:"low", attach:"fo", period:4, ringFrom:.5, strap:true,
+  base:{he:[100,200],sh:[124,206],hi:[180,212],kn2:[216,214],fo2:[256,214]},
+  circle:{c:[250,176],rx:34,ry:42},
+  steps:["Set a low pulley with light springs and place one foot in the strap.","Extend that leg up toward the rack; rest the other leg long.","Trace a controlled circle, crossing the midline and opening out.","Keep the circle small enough that the pelvis stays still.","Do 8–10 each direction, then switch legs."]
+},
+{
+  cat:"strap", id:"scissors", name:"Scissors", focus:"Reformer · Core",
+  sub:"Both feet in the straps, split the legs and switch in a slow, controlled scissor.",
+  setup:{Height:"Bottom port",Attach:"Straps + loops (feet)",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"low", attach:"fo", attach2:"fo2", period:3, ringFrom:.5, strap:true,
+  start:{he:[100,198],sh:[124,204],hi:[185,212],kn:[222,168],fo:[233,128],kn2:[230,206],fo2:[247,236]},
+  end:  {he:[100,198],sh:[124,204],hi:[185,212],kn:[230,206],fo:[247,236],kn2:[222,168],fo2:[233,128]},
+  steps:["Lie back with both feet in the straps and legs reaching up.","Curl the head and shoulders up to engage the core (optional).","Lower one leg away as the other floats toward you — a long split.","Switch legs smoothly, like scissors, against the spring tension.","Keep the low back stable; move from the hips, not the back."]
+},
+{
+  cat:"strap", id:"slstretch", name:"Single-Leg Stretch", focus:"Reformer · Deep core",
+  sub:"Curled up with feet in the straps, draw one knee in as the other reaches long.",
+  setup:{Height:"Bottom port",Attach:"Straps + loops (feet)",Mode:"Free Lift · Constant",Load:"Yellow spring · 4–7 lb/side"},
+  pulley:"low", attach:"fo", attach2:"fo2", period:2.8, ringFrom:.5, strap:true,
+  start:{he:[120,186],sh:[140,196],hi:[188,212],kn:[183,164],fo:[158,150],kn2:[240,196],fo2:[290,200]},
+  end:  {he:[120,186],sh:[140,196],hi:[188,212],kn:[240,196],fo:[290,200],kn2:[183,164],fo2:[158,150]},
+  steps:["Place both feet in the straps and curl your head and chest up.","Draw one knee toward your chest as the other leg extends long.","Switch, keeping the extended leg high enough to protect the back.","Move with the breath — inhale a switch, exhale a switch.","Hold the curl steady; the springs add gentle resistance."]
+},
+{
+  cat:"strap", id:"hundred", name:"The Hundred", focus:"Reformer · Core & breath",
+  sub:"Hands in the straps, curl up and pump the arms with strong steady breaths.",
+  setup:{Height:"Bottom port",Attach:"Straps + loops (hands)",Mode:"Free Lift · Constant",Load:"Yellow spring · 4–7 lb/side"},
+  pulley:"low", attach:"ha", period:0.9, ringFrom:.5, strap:true,
+  start:{he:[118,190],sh:[138,200],hi:[188,214],kn:[226,184],fo:[268,158],el:[160,206],ha:[186,214]},
+  end:  {he:[118,188],sh:[138,198],hi:[188,214],kn:[226,184],fo:[268,158],el:[160,202],ha:[186,200]},
+  steps:["Hold the straps with light springs and lie back, legs at a high diagonal.","Curl your head and shoulders up; reach the arms long by your sides.","Pump the arms up and down briskly against the strap tension.","Inhale for five beats, exhale for five — ten breaths total.","Keep the gaze toward your thighs and the core scooped."]
+},
+{
+  cat:"strap", id:"armpull", name:"Seated Arm Pull", focus:"Reformer · Back & posture",
+  sub:"Sit tall facing the rack and draw the straps back, opening the chest.",
+  setup:{Height:"Bottom port",Attach:"Straps + loops (hands)",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"mid", attach:"ha", period:3, ringFrom:.5, strap:true,
+  start:{he:[160,128],sh:[160,150],el:[188,156],ha:[224,158],hi:[160,214],kn:[200,216],fo:[244,218]},
+  end:  {he:[160,128],sh:[160,150],el:[150,150],ha:[176,162],hi:[160,214],kn:[200,216],fo:[244,218]},
+  steps:["Sit tall facing the rack, legs long, straps in your hands.","Lengthen the spine and reach the arms forward.","Exhale and draw the straps back toward your ribs, elbows close.","Open across the collarbones; keep the shoulders down.","Resist the springs slowly forward, staying lifted through the spine."]
+},
+
+/* ---- Speediance app Pilates: standing & bench (straps/handles) ---- */
+{
+  cat:"strap", id:"butterfly", name:"Standing Butterfly", focus:"Pilates · Side body",
+  sub:"A standing side bend — the top arm sweeps overhead in an arc as the lower arm draws down.",
+  setup:{Height:"High port",Attach:"Straps / handles",Mode:"Free Lift · Constant",Load:"Yellow spring · 4–7 lb/side"},
+  pulley:"high", attach:"ha", period:4, ringFrom:.5, strap:true,
+  start:{fo:[150,250],kn:[150,206],hi:[150,172],sh:[150,122],he:[150,100],el:[150,92],ha:[150,66],el2:[150,150],ha2:[150,200]},
+  end:  {fo:[150,250],kn:[150,206],hi:[152,172],sh:[170,128],he:[182,112],el:[178,98],ha:[190,72],el2:[164,158],ha2:[176,205]},
+  steps:["Stand tall on the platform, top hand in the overhead strap, lower hand in the low strap.","Lengthen the whole body upward, shoulders relaxed and down, arms fully extended.","Exhale and bend the torso to one side — sweep the top arm overhead in an arc as the lower arm pulls toward the floor.","Keep the lower body stable and the torso long, not collapsing.","Inhale and return to the lengthened center with control, then repeat to the other side."]
+},
+{
+  cat:"strap", id:"punch", name:"Standing Punch", focus:"Pilates · Core & power",
+  sub:"In a split stance, punch one handle forward while the other stays at the ribs, then alternate.",
+  setup:{Height:"Mid port",Attach:"Dual handles",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"mid", attach:"ha", attach2:"ha2", period:2.6, ringFrom:.5, strap:true,
+  start:{fo:[120,250],kn:[135,212],hi:[160,178],sh:[160,128],he:[160,106],fo2:[200,250],kn2:[185,214],el:[130,132],ha:[100,130],el2:[176,152],ha2:[182,142]},
+  end:  {fo:[120,250],kn:[135,212],hi:[160,178],sh:[160,128],he:[160,106],fo2:[200,250],kn2:[185,214],el:[172,136],ha:[150,135],el2:[150,130],ha2:[120,128]},
+  steps:["Set mid cables with a handle in each hand and stand in a split stance, core braced and spine neutral.","Keep the knees tracking over the toes and the shoulders relaxed down.","Exhale, settle into the lunge, and punch one hand straight forward as the other stays at the ribs.","Inhale, press through the front foot, and control both arms back to the start.","Alternate sides with control, keeping the torso square."]
+},
+{
+  cat:"strap", id:"feetalt", name:"Feet Pulling Alternation", focus:"Pilates · Hamstrings",
+  sub:"Prone on the bench, feet in the straps — curl one heel toward the glutes, then alternate.",
+  setup:{Height:"High port",Attach:"Ankle straps + bench",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"high", attach:"fo", attach2:"fo2", period:2.6, ringFrom:.5, strap:true, bench:true,
+  start:{he:[92,150],sh:[140,150],hi:[250,150],kn:[288,150],fo:[300,104],kn2:[288,156],fo2:[270,106]},
+  end:  {he:[92,150],sh:[140,150],hi:[250,150],kn:[288,150],fo:[266,100],kn2:[288,156],fo2:[306,110]},
+  steps:["Lie face-down on the bench, pelvis stable, abdominals lightly engaged, both feet in the straps.","Bring the legs together with the knees bent about 90°, shins pointing up.","Exhale and curl one heel toward your glutes while the other leg stays still.","Inhale to return that leg with control — don't rock the pelvis.","Exhale, switch legs, and keep an even rhythm side to side."]
+},
+{
+  cat:"strap", id:"feetcurl", name:"Feet Pulling Hamstring Curl", focus:"Pilates · Hamstrings",
+  sub:"Prone on the bench, feet in the straps — curl both heels toward the glutes together.",
+  setup:{Height:"High port",Attach:"Ankle straps + bench",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"high", attach:"fo", attach2:"fo2", period:3, ringFrom:.5, strap:true, bench:true,
+  start:{he:[92,150],sh:[140,150],hi:[250,150],kn:[288,150],fo:[300,104],kn2:[288,156],fo2:[306,110]},
+  end:  {he:[92,150],sh:[140,150],hi:[250,150],kn:[288,150],fo:[266,100],kn2:[288,156],fo2:[272,106]},
+  steps:["Lie prone on the bench, pelvis pressed down, abdominals lightly on, both feet in the straps.","Legs together, knees bent to about 90°, shins toward the ceiling. Inhale to prepare.","Exhale and curl both heels toward your glutes with control.","Keep the pelvis still and in contact with the bench throughout.","Inhale and lower the shins back to 90° slowly against the springs."]
+},
+{
+  cat:"strap", id:"breaststroke", name:"Breaststroke", focus:"Pilates · Back extension",
+  sub:"Prone with arms reaching forward in the straps — lift the chest and legs together.",
+  setup:{Height:"High port",Attach:"Straps (hands) + bench",Mode:"Free Lift · Constant",Load:"Yellow spring · 4–7 lb/side"},
+  pulley:"high", attach:"ha", attach2:"ha2", period:3.6, ringFrom:.5, strap:true, bench:true,
+  start:{he:[100,152],sh:[145,152],hi:[250,150],kn:[285,152],fo:[316,150],el:[118,151],ha:[84,150],el2:[118,156],ha2:[84,155]},
+  end:  {he:[104,134],sh:[148,138],hi:[250,150],kn:[285,150],fo:[320,138],el:[116,138],ha:[80,130],el2:[116,143],ha2:[80,135]},
+  steps:["Lie face-down on the bench, neck long, shoulders down, core engaged, a strap in each hand reaching forward.","Inhale to prepare with the arms stretched forward and the legs long behind.","Exhale and lift the chest and legs off the bench together, keeping length through the body.","Hold the lifted extension briefly, balanced and stable.","Inhale, then control the descent back to the start, lengthening as you lower."]
+},
+{
+  cat:"strap", id:"breastpress", name:"Breaststroke Press + Extension", focus:"Pilates · Upper back",
+  sub:"Prone, press the straps from your waist to straight overhead as the upper back extends.",
+  setup:{Height:"High port",Attach:"Straps (hands) + bench",Mode:"Free Lift · Constant",Load:"Blue spring · 10–12 lb/side"},
+  pulley:"high", attach:"ha", attach2:"ha2", period:3.6, ringFrom:.5, strap:true, bench:true,
+  start:{he:[96,150],sh:[150,150],hi:[252,150],kn:[285,152],fo:[316,150],el:[176,150],ha:[152,158],el2:[176,156],ha2:[152,163]},
+  end:  {he:[100,134],sh:[148,138],hi:[252,150],kn:[285,150],fo:[318,140],el:[114,140],ha:[80,134],el2:[114,145],ha2:[80,139]},
+  steps:["Lie prone on the bench, neck neutral, shoulders down, core on, a strap in each hand at your waist.","Begin with the arms bent in by the sides of the waist.","Exhale and press the arms straight overhead, engaging the upper back so the chest extends up.","Keep the neck long — extend through the upper thoracic spine, not the lower back.","Inhale and lower the chest with control, guiding the straps back to your waist."]
+},
+
+/* ---- Speediance app Pilates: stretch & mobility (bodyweight) ---- */
+{
+  cat:"stretch", id:"child", name:"Child's Pose", focus:"Stretch · Lats & lower back",
+  sub:"Sit the hips back to the heels and fold forward, resting the forehead and reaching the arms long.",
+  setup:{Height:"—",Attach:"Mat",Mode:"Hold & breathe"},
+  pulley:"low", period:5, ringFrom:.5,
+  start:{hi:[250,232],kn:[228,250],fo:[270,252],sh:[186,236],he:[156,242],el:[150,244],ha:[116,248]},
+  end:  {hi:[250,232],kn:[228,250],fo:[270,252],sh:[182,242],he:[150,248],el:[146,250],ha:[112,252]},
+  steps:["Kneel with the knees about hip-width and the tops of the feet pressing into the mat.","Sit the hips back toward the heels and keep the pelvis stable.","Lengthen the spine, then hinge forward from the hips.","Rest the forehead on the mat and reach the arms forward (or lay them by your sides).","Keep the hips close to the heels and breathe evenly through the stretch."]
+},
+{
+  cat:"stretch", id:"cheststretch", name:"Chest Stretch", focus:"Stretch · Chest & rotation",
+  sub:"Seated tall, open into a thoracic rotation, reaching the top arm back to lift the sternum.",
+  setup:{Height:"—",Attach:"Mat",Mode:"Hold & breathe"},
+  pulley:"low", period:4.5, ringFrom:.5,
+  start:{hi:[185,232],kn:[150,236],fo:[120,238],sh:[186,182],he:[184,160],el:[214,184],ha:[244,188],el2:[200,202],ha2:[232,230]},
+  end:  {hi:[185,232],kn:[150,236],fo:[120,238],sh:[186,182],he:[176,158],el:[160,172],ha:[126,176],el2:[200,202],ha2:[232,230]},
+  steps:["Sit tall with the legs folded comfortably and one hand resting on the mat for support.","Lightly engage the core, keep the pelvis neutral, and let the shoulders relax down.","Inhale to prepare, then with the top arm straight, open it across into a rotation.","Let the rib cage lead the upper body as you reach the arm back, lifting the sternum.","Exhale to return to center with control, then repeat on the other side."]
+},
+{
+  cat:"stretch", id:"hammy", name:"Hamstring Stretch", focus:"Stretch · Hamstrings",
+  sub:"Seated forward fold over extended legs, hinging from the hips to reach the feet.",
+  setup:{Height:"—",Attach:"Mat",Mode:"Hold & breathe"},
+  pulley:"low", period:5, ringFrom:.5,
+  start:{hi:[160,232],kn:[210,234],fo:[262,234],sh:[160,182],he:[158,160],el:[185,182],ha:[214,184]},
+  end:  {hi:[160,232],kn:[210,234],fo:[262,234],sh:[196,210],he:[214,214],el:[235,222],ha:[258,230]},
+  steps:["Sit tall with the legs extended together (or hip-width), feet flexed.","Lightly engage the core, keep the pelvis neutral, and lengthen the spine.","Inhale and reach forward toward the ankles.","Exhale and hinge from the hips into a forward fold, feeling the hamstrings lengthen.","Breathe steadily, then exhale to return upright with the feet still flexed."]
+},
+{
+  cat:"stretch", id:"glutestretch", name:"Glutes Stretch", focus:"Stretch · Hips & glutes",
+  sub:"A pigeon-style fold — one leg forward and bent, the other extended back, hinging forward.",
+  setup:{Height:"—",Attach:"Mat",Mode:"Hold & breathe"},
+  pulley:"low", period:5, ringFrom:.5,
+  start:{hi:[220,226],kn:[202,236],fo:[242,240],kn2:[182,234],fo2:[122,238],sh:[268,230],he:[298,234],el:[284,236],ha:[314,238]},
+  end:  {hi:[220,228],kn:[200,238],fo:[240,242],kn2:[180,236],fo2:[120,240],sh:[270,234],he:[300,238],el:[286,240],ha:[316,242]},
+  steps:["Bring one leg forward, bending at the hip and knee; extend the other leg back with the thigh on the mat.","Keep the hips square and facing down, pelvis level — no tilting.","Inhale to lengthen the spine and level the pelvis.","Exhale and hinge forward from the hips, resting the forearms or forehead lightly on the mat.","Keep the back hip reaching forward without collapsing the lower back; breathe evenly."]
+}
+];
+
+// ---- Per-side load table (per-side range + active cable count) ----
+const LOAD = {
+  pulldown:{cables:2,perSide:[10,20]}, row:{cables:2,perSide:[12,22]},
+  press:{cables:2,perSide:[20,40]}, curl:{cables:2,perSide:[10,20]},
+  pushdown:{cables:1,perSide:[15,30]}, squat:{cables:2,perSide:[15,30]},
+  rdl:{cables:2,perSide:[15,30]},
+  footwork:{cables:2,perSide:[15,22],spring:"Red"}, circles:{cables:1,perSide:[4,7],spring:"Yellow"},
+  scissors:{cables:2,perSide:[10,12],spring:"Blue"}, slstretch:{cables:2,perSide:[4,7],spring:"Yellow"},
+  hundred:{cables:2,perSide:[4,7],spring:"Yellow"}, armpull:{cables:2,perSide:[10,12],spring:"Blue"},
+  butterfly:{cables:1,perSide:[4,7],spring:"Yellow"}, punch:{cables:2,perSide:[10,12],spring:"Blue"},
+  feetalt:{cables:2,perSide:[10,12],spring:"Blue"}, feetcurl:{cables:2,perSide:[10,12],spring:"Blue"},
+  breaststroke:{cables:2,perSide:[4,7],spring:"Yellow"}, breastpress:{cables:2,perSide:[10,12],spring:"Blue"}
+};
+
+// ---- Canvas renderer ----
+const cv = document.getElementById("stage");
+let ctx = cv.getContext("2d");
+const SCREEN_PAL = {body:"#c7cdb4",body2:"#8c9576",steel:"#2b3326",steel2:"#3a4431",
+  screen:"#7fd0c0",cable:"#cfd3c0",strap:"#d9a86a",strapIn:"#7a5a32",mat:"#222a1c",grip:"#1c2117",pulleyDot:"#11140d",bg:null,shadow:".28"};
+const PRINT_PAL = {body:"#46533d",body2:"#717d5f",steel:"#c8cdbb",steel2:"#b4bba2",
+  screen:"#74b2a4",cable:"#5b6150",strap:"#b0763a",strapIn:"#7a5226",mat:"#d6cbb0",grip:"#2c2a22",pulleyDot:"#8a907c",bg:"#f4efe2",shadow:".10"};
+let PAL = SCREEN_PAL;
+let DPR=1, SCALE=1;
+
+function fit(){
+  const wrap = cv.parentElement;
+  let cssW = Math.min(wrap.clientWidth-28, 520); if(cssW<260) cssW=260;
+  const cssH = cssW*320/480;
+  cv.style.width=cssW+"px"; cv.style.height=cssH+"px";
+  DPR = window.devicePixelRatio||1; SCALE = cssW/480;
+  cv.width = Math.round(cssW*DPR); cv.height = Math.round(cssH*DPR);
+  ctx.setTransform(SCALE*DPR,0,0,SCALE*DPR,0,0);
+}
+window.addEventListener("resize", fit);
+
+function lp(a,b,t){return [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];}
+function seg(a,b,w,col){if(!a||!b)return;ctx.lineWidth=w;ctx.strokeStyle=col;ctx.lineCap="round";ctx.lineJoin="round";
+  ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+function disc(p,r,col){ctx.fillStyle=col;ctx.beginPath();ctx.arc(p[0],p[1],r,0,Math.PI*2);ctx.fill();}
+function rr(x,y,w,h,r,col){ctx.fillStyle=col;ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);ctx.fill();}
+
+function drawMachine(pulley){
+  rr(40,250,392,12,6,PAL.mat);
+  rr(430,40,22,216,9,PAL.steel);
+  rr(434,44,5,210,3,PAL.steel2);
+  rr(424,150,9,46,3,PAL.steel2);
+  rr(425.5,154,6,30,2,PAL.screen);
+  rr(420,250,40,12,5,PAL.steel);
+  const p=PULLEY[pulley];
+  rr(p[0]-6,p[1]-9,16,18,5,PAL.steel2);
+  disc([p[0],p[1]],4.5,PAL.pulleyDot);
+}
+
+function drawBench(){
+  rr(58,146,250,12,5,PAL.steel);
+  rr(86,158,11,90,3,PAL.steel2);
+  rr(250,158,11,90,3,PAL.steel2);
+  rr(72,246,46,8,3,PAL.steel); rr(236,246,46,8,3,PAL.steel);
+}
+function drawCable(pulley,pt,strap){
+  const p=PULLEY[pulley];
+  if(strap){ seg(p,pt,6,PAL.strap); disc(pt,7,PAL.strap); disc(pt,3,PAL.strapIn); }
+  else{ seg(p,pt,3,PAL.cable); disc(pt,6.5,PAL.grip); }
+}
+
+function drawFigure(P){
+  if(P.kn2){ seg(P.hi,P.kn2,18,PAL.body2); if(P.fo2) seg(P.kn2,P.fo2,16,PAL.body2); }
+  if(P.el2){ seg(P.sh,P.el2,16,PAL.body2); if(P.ha2) seg(P.el2,P.ha2,14,PAL.body2); }
+  if(P.kn){ seg(P.hi,P.kn,20,PAL.body); if(P.fo) seg(P.kn,P.fo,18,PAL.body); }
+  if(P.hi&&P.sh) seg(P.hi,P.sh,22,PAL.body);
+  if(P.el){ seg(P.sh,P.el,18,PAL.body); if(P.ha) seg(P.el,P.ha,16,PAL.body); }
+  if(P.he){ seg(P.sh,P.he,16,PAL.body); disc(P.he,14,PAL.body); }
+}
+
+function joints(ex,p){
+  if(ex.circle){
+    const o={...ex.base};
+    const a=Math.PI*2*p, c=ex.circle;
+    o.fo=[c.c[0]+c.rx*Math.cos(a), c.c[1]+c.ry*Math.sin(a)];
+    o.kn=[(o.hi[0]+o.fo[0])/2, (o.hi[1]+o.fo[1])/2-10];
+    return o;
+  }
+  const t=(1-Math.cos(Math.PI*2*p))/2;
+  const o={};
+  for(const k in ex.start){ o[k]= ex.end[k]? lp(ex.start[k],ex.end[k],t) : ex.start[k].slice(); }
+  return o;
+}
+function tphase(ex,p){ return ex.circle ? (Math.sin(Math.PI*2*p)+1)/2 : (1-Math.cos(Math.PI*2*p))/2; }
+
+function scene(ex,P){
+  if(PAL.bg){ ctx.fillStyle=PAL.bg; ctx.fillRect(0,0,480,320); } else ctx.clearRect(0,0,480,320);
+  ctx.fillStyle="rgba(0,0,0,"+PAL.shadow+")";ctx.beginPath();ctx.ellipse(190,255,120,8,0,0,Math.PI*2);ctx.fill();
+  drawMachine(ex.pulley);
+  if(ex.bench) drawBench();
+  const a1=P[ex.attach]; if(a1) drawCable(ex.pulley,a1,ex.strap);
+  if(ex.attach2 && P[ex.attach2]) drawCable(ex.pulley,P[ex.attach2],ex.strap);
+  drawFigure(P);
+  if(a1){ if(ex.strap){disc(a1,7,PAL.strap);disc(a1,3,PAL.strapIn);} else disc(a1,6.5,PAL.grip); }
+}
+
+let idx=0, cat="cable", playing=true, t0=performance.now(), curStep=0, stepAcc=0;
+let lastP=0,lastNow=0;
+
+function visible(){ return EX.map((e,i)=>({e,i})).filter(x=>x.e.cat===cat); }
+
+function frame(now){
+  const ex=EX[idx];
+  const dt=(now-t0)/1000;
+  let p = playing ? ((dt/ex.period)%1) : lastP;
+  if(playing) lastP=p;
+  const P=joints(ex,p), t=tphase(ex,p);
+  scene(ex,P);
+  document.getElementById("ringI").style.transform=`scale(${0.5+0.55*t})`;
+  document.getElementById("tempolbl").textContent = ex.cat==="stretch" ? (t>0.5?"Deepen":"Ease") : (ex.strap ? (t>0.5?"Press":"Return") : (t>0.5?"Lift":"Lower"));
+  if(playing){
+    stepAcc += (now-(lastNow||now));
+    if(stepAcc > ex.period*1000){ stepAcc=0; curStep=(curStep+1)%ex.steps.length; markStep(); }
+  }
+  lastNow=now;
+  requestAnimationFrame(frame);
+}
+
+function snapshot(ex){
+  const off=document.createElement("canvas"); off.width=480; off.height=320;
+  const savedCtx=ctx, savedPAL=PAL;
+  ctx=off.getContext("2d"); PAL=PRINT_PAL;
+  scene(ex, joints(ex, ex.circle?0.15:0.5));
+  const url=off.toDataURL("image/png");
+  ctx=savedCtx; PAL=savedPAL;
+  return url;
+}
+
+function markStep(){[...document.getElementById("steps").children].forEach((li,i)=>li.classList.toggle("cur",i===curStep));}
+
+function loadHTML(ex){
+  const L=LOAD[ex.id]; if(!L) return "";
+  const [a,b]=L.perSide;
+  const sp = L.spring ? `<span class="lspring ${L.spring[0].toLowerCase()}">${L.spring} spring</span>` : "";
+  return `<div class="lcol"><div class="lk">Per side</div><div class="lv">${a}–${b} lb</div></div>
+    <div class="lmul">×${L.cables}</div>
+    <div class="lcol"><div class="lk">Total · ${L.cables} cable${L.cables>1?"s":""}</div><div class="lv accent">${a*L.cables}–${b*L.cables} lb</div></div>
+    ${sp}`;
+}
+
+function renderInfo(){
+  const ex=EX[idx];
+  document.getElementById("exFocus").textContent=ex.focus;
+  document.getElementById("exName").textContent=ex.name;
+  document.getElementById("exSub").textContent=ex.sub;
+  const vis=visible(); const pos=vis.findIndex(x=>x.i===idx)+1;
+  document.getElementById("exno").textContent=String(pos).padStart(2,"0")+" / "+String(vis.length).padStart(2,"0");
+  const s=ex.setup;
+  document.getElementById("exSetup").innerHTML=["Height","Attach","Mode"].map(k=>
+    `<div><div class="k">${k}</div><div class="v ${k==='Mode'?'accent':''}">${s[k]}</div></div>`).join("");
+  const lh=loadHTML(ex); const le=document.getElementById("exLoad");
+  le.innerHTML=lh; le.style.display=lh?"flex":"none";
+  document.getElementById("steps").innerHTML=ex.steps.map(x=>`<li>${x}</li>`).join("");
+  curStep=0;stepAcc=0;markStep();
+}
+
+function renderPrintSheet(){
+  const cats=[["cable","Cable Strength"],["strap","Pilates — Straps & Cable"],["stretch","Stretch & Mobility"]];
+  let html=`<div class="pwrap"><div class="ptitle">Speediance Gym Monster 1 — Exercise Library</div>
+    <div class="pintro">Cable strength, reformer-style Pilates, and mobility. Max 220 lb total (110 lb/arm), 1 lb steps, 10 pulley heights. Pilates runs in Free Lift · Constant mode using the strap accessory; stretches are bodyweight holds.</div>
+    <div class="pspringrow"><span><b>Yellow</b> light · 4–7 lb/side</span><span><b>Blue</b> medium · 10–12 lb/side</span><span><b>Red</b> heavy · 15–22 lb/side</span></div>`;
+  cats.forEach(([c,label])=>{
+    html+=`<div class="pcat">${label}</div>`;
+    EX.filter(e=>e.cat===c).forEach((ex,n)=>{
+      const s=ex.setup, L=LOAD[ex.id];
+      const loadPill = L ? `<span class="pload">Per side ${L.perSide[0]}–${L.perSide[1]} lb · Total ×${L.cables} = ${L.perSide[0]*L.cables}–${L.perSide[1]*L.cables} lb${L.spring?` · ${L.spring}`:""}</span>` : "";
+      const img=snapshot(ex);
+      html+=`<div class="pcard"><img src="${img}" alt="${ex.name}"><div class="pbody">
+        <div class="pfocus">${ex.focus}</div><h3>${n+1}. ${ex.name}</h3><p>${ex.sub}</p>
+        <div class="ppills"><span>${s.Height}</span><span>${s.Attach}</span><span>${s.Mode}</span>${loadPill}</div>
+        <ol>${ex.steps.map(x=>`<li>${x}</li>`).join("")}</ol></div></div>`;
+    });
+  });
+  html+=`<div class="pdisc">General fitness guidance, not medical advice. Spring-to-weight values are approximate starting points — let the Gym Monster's strength assessment refine them.</div></div>`;
+  document.getElementById("printSheet").innerHTML=html;
+}
+
+function renderChips(){
+  const rail=document.getElementById("rail");rail.innerHTML="";
+  visible().forEach(({e,i},n)=>{
+    const c=document.createElement("button");c.className="chip"+(i===idx?" active":"");
+    c.innerHTML=`<span class="n">${n+1}</span>${e.name}`;
+    c.onclick=()=>go(i);rail.appendChild(c);
+  });
+}
+
+/* ---- guided audio: announce → 3·2·1 count-in → count reps to target → complete ---- */
+const TARGET = {
+  pulldown:12,row:12,press:12,curl:15,pushdown:15,squat:12,rdl:10,
+  footwork:12,circles:8,scissors:10,slstretch:10,hundred:10,armpull:10,
+  butterfly:8,punch:10,feetalt:10,feetcurl:12,breaststroke:8,breastpress:10,
+  child:5,cheststretch:5,hammy:5,glutestretch:5
+};
+function targetOf(ex){ return TARGET[ex.id] || 10; }
+
+let soundOn=true, unlocked=false, audioCtx=null;
+let seq=0, phase="idle", repCount=0, target=10, intervalMs=3000, repTimer=null;
+let totalSets=3, curSet=1, restSec=15;
+const COUNTIN=["3","2","1","Go"];
+
+function unlockAudio(){
+  if(unlocked) return; unlocked=true;
+  try{ audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+       if(audioCtx.state==="suspended") audioCtx.resume(); }catch(e){}
+}
+window.addEventListener("pointerdown",unlockAudio);
+window.addEventListener("keydown",unlockAudio);
+
+function beep(){
+  try{
+    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain(), t=audioCtx.currentTime;
+    o.type="sine"; o.frequency.value=880; o.connect(g); g.connect(audioCtx.destination);
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.25,t+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
+    o.start(t); o.stop(t+0.2);
+  }catch(e){}
+}
+let voices=[], chosenVoice=null;
+function rankVoice(v){
+  const n=(v.name||"").toLowerCase(); let s=0;
+  if(/^en/i.test(v.lang)) s+=10; else s-=40;
+  if(/en[-_]us/i.test(v.lang)) s+=4;
+  if(/natural|neural|enhanced|premium/.test(n)) s+=40;   // modern high-quality voices
+  if(/\bsiri\b/.test(n)) s+=34;
+  if(/google/.test(n)) s+=26;
+  if(/samantha|ava|allison|serena|zoe|nova|aria|jenny|sonia|libby|guy|evan|noah|emma|joanna|matilda/.test(n)) s+=20;
+  if(/online/.test(n) && /microsoft/.test(n)) s+=16;
+  if(v.localService===false) s+=4;
+  if(/zira|david|mark|hazel|fred|albert|compact|espeak|e-speak/.test(n)) s-=25;  // robotic defaults
+  return s;
+}
+function pickVoice(){
+  if(!("speechSynthesis" in window)) return;
+  voices = speechSynthesis.getVoices()||[];
+  if(!voices.length) return;
+  const en = voices.filter(v=>/^en/i.test(v.lang));
+  const pool = (en.length?en:voices).slice().sort((a,b)=>rankVoice(b)-rankVoice(a));
+  if(!chosenVoice || !voices.includes(chosenVoice)) chosenVoice = pool[0];
+  buildVoiceMenu(pool);
+}
+function buildVoiceMenu(pool){
+  const sel=document.getElementById("voiceSel"); if(!sel) return;
+  sel.innerHTML = pool.map(v=>`<option value="${v.name}">${v.name.replace(/^(Microsoft|Google)\s+/,"")}</option>`).join("");
+  if(chosenVoice) sel.value=chosenVoice.name;
+}
+if("speechSynthesis" in window){
+  try{ speechSynthesis.onvoiceschanged = pickVoice; }catch(e){}
+  pickVoice();
+}
+function makeUtter(text){
+  const u=new SpeechSynthesisUtterance(String(text).replace(/[·–—]/g," "));
+  if(chosenVoice){ u.voice=chosenVoice; u.lang=chosenVoice.lang; }
+  u.rate=0.98; u.pitch=1; u.volume=1;
+  return u;
+}
+function say(text, isNumber){
+  if(!soundOn || !unlocked) return;
+  if("speechSynthesis" in window){ try{ speechSynthesis.speak(makeUtter(text)); return; }catch(e){} }
+  if(isNumber) beep();
+}
+function setRepText(t){ const el=document.getElementById("repNum"); if(el) el.textContent=t; }
+function setRepLbl(t){ const el=document.getElementById("repLbl"); if(el) el.textContent=t; }
+function updateRepUI(){ setRepText(repCount); }
+function clearReps(){ if(repTimer){clearInterval(repTimer); repTimer=null;} }
+
+function buildIntro(ex){
+  const s=ex.setup, L=LOAD[ex.id], parts=[ex.name+"."];
+  const bits=[];
+  if(s.Height && s.Height!=="—") bits.push(s.Height);
+  if(s.Attach) bits.push(s.Attach);
+  if(s.Mode) bits.push(s.Mode);
+  if(bits.length) parts.push("Setup: "+bits.join(", ")+".");
+  if(L) parts.push("Resistance about "+L.perSide[0]+" to "+L.perSide[1]+" pounds per side"+(L.cables>1?", "+(L.perSide[0]*L.cables)+" to "+(L.perSide[1]*L.cables)+" pounds total.":".")+(L.spring?" "+L.spring+" spring.":""));
+  parts.push("How to move.");
+  ex.steps.forEach(st=>parts.push(st));
+  parts.push(ex.cat==="stretch"
+    ? (totalSets+" hold"+(totalSets>1?"s":"")+" of "+targetOf(ex)+" breaths.")
+    : (totalSets+" set"+(totalSets>1?"s":"")+" of "+targetOf(ex)+" reps."));
+  parts.push("Get ready.");
+  return parts.join(" ");
+}
+
+function stopSequence(){
+  seq++; clearReps();
+  if("speechSynthesis" in window){ try{speechSynthesis.cancel();}catch(e){} }
+}
+
+function doTick(token){
+  if(token!==seq || !playing){ clearReps(); return; }
+  repCount++; updateRepUI(); say(repCount,true);
+  if(repCount>=target){
+    clearReps();
+    setTimeout(()=>{ if(token===seq && playing) finishSet(token); }, intervalMs);
+  }
+}
+function startTicking(token){
+  clearReps(); if(!playing) return;
+  repTimer=setInterval(()=>doTick(token), intervalMs);
+}
+function beginCounting(token){
+  if(token!==seq || !playing) return;
+  phase="counting"; repCount=0; updateRepUI();
+  setRepLbl((EX[idx].cat==="stretch"?"hold ":"set ")+curSet+"/"+totalSets+" · of "+target);
+  doTick(token);                       // first count right after "Go"
+  if(repCount<target) startTicking(token);
+}
+function countIn(token,i){
+  if(token!==seq || !playing) return;
+  phase="countin";
+  if(i<COUNTIN.length){
+    setRepText(COUNTIN[i]); say(COUNTIN[i]);
+    setTimeout(()=>countIn(token,i+1), 1000);
+  } else beginCounting(token);
+}
+function finishSet(token){
+  if(token!==seq) return;
+  const stretch = EX[idx].cat==="stretch";
+  setRepText("✓");
+  if(curSet < totalSets){
+    say((stretch?"Hold ":"Set ")+curSet+" of "+totalSets+" complete.");
+    curSet++;
+    restThen(token);
+  } else {
+    phase="done";
+    setRepLbl("complete");
+    say((stretch?"All holds complete. ":"All "+totalSets+" sets complete. ")+"Exercise complete. Well done.");
+  }
+}
+
+function restThen(token){
+  phase="rest";
+  setRepLbl("rest · next set "+curSet+"/"+totalSets);
+  if(restSec>0) say("Rest "+restSec+" seconds.");
+  let rem=restSec;
+  const step=()=>{
+    if(token!==seq || !playing) return;
+    if(rem<=0){ setRepText("Go"); say("Go"); beginCounting(token); return; }
+    setRepText(rem);
+    if(rem<=3) say(rem,true);             // spoken count-in for the last 3 seconds
+    rem--; setTimeout(step,1000);
+  };
+  step();
+}
+
+function startSequence(fresh){
+  stopSequence();
+  const ex=EX[idx];
+  target=targetOf(ex);
+  setRepLbl((ex.cat==="stretch"?"of "+target+" breaths":"of "+target+" reps"));
+  if(fresh){ repCount=0; curSet=1; phase="idle"; setRepText("0"); }
+  if(!playing) return;
+  const token=seq;
+  if(soundOn && unlocked){
+    phase="intro";
+    setRepText("•");
+    const u=makeUtter(buildIntro(ex));
+    u.onend=()=>{ if(token===seq && playing) countIn(token,0); };
+    u.onerror=()=>{ if(token===seq && playing) countIn(token,0); };
+    try{ speechSynthesis.cancel(); speechSynthesis.speak(u); }
+    catch(e){ countIn(token,0); }
+  } else {
+    beginCounting(token);              // muted/locked: count visually, no intro
+  }
+}
+
+function go(i){
+  idx=i; lastP=0; t0=performance.now();
+  renderChips(); renderInfo(); startSequence(true);
+}
+
+function setCat(c){
+  cat=c;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.cat===c));
+  const first=EX.findIndex(e=>e.cat===c);
+  go(first);
+}
+
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setCat(t.dataset.cat));
+document.getElementById("prev").onclick=()=>{const v=visible();let n=v.findIndex(x=>x.i===idx);n=(n-1+v.length)%v.length;go(v[n].i);};
+document.getElementById("next").onclick=()=>{const v=visible();let n=v.findIndex(x=>x.i===idx);n=(n+1)%v.length;go(v[n].i);};
+document.getElementById("play").onclick=()=>{
+  playing=!playing;
+  document.getElementById("playicon").innerHTML=playing?'<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';
+  if(playing){
+    t0=performance.now()-lastP*EX[idx].period*1000;
+    if(phase==="counting"){ seq++; startTicking(seq); }   // resume the set, no re-intro
+    else startSequence(true);                              // (re)run the guided flow
+  } else {
+    stopSequence();                                        // freeze; keep phase & count
+  }
+};
+const SPK_ON='<path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+const SPK_OFF='<path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+document.getElementById("sound").onclick=()=>{
+  soundOn=!soundOn; unlockAudio();
+  if(!soundOn && "speechSynthesis" in window){ try{speechSynthesis.cancel();}catch(e){} }
+  document.getElementById("soundicon").innerHTML = soundOn ? SPK_ON : SPK_OFF;
+};
+document.getElementById("paceRange").oninput=(e)=>{
+  const v=parseFloat(e.target.value); intervalMs=v*1000;
+  document.getElementById("paceVal").textContent=v.toFixed(1)+"s";
+  if(phase==="counting" && playing && repTimer){ seq++; startTicking(seq); }  // apply new pace, keep count
+};
+const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
+function setSets(v){ totalSets=clampN(v,1,6); document.getElementById("setsVal").textContent=totalSets; }
+function setRest(v){ restSec=clampN(v,0,90); document.getElementById("restVal").textContent=restSec+"s"; }
+document.getElementById("setsUp").onclick=()=>setSets(totalSets+1);
+document.getElementById("setsDn").onclick=()=>setSets(totalSets-1);
+document.getElementById("restUp").onclick=()=>setRest(restSec+5);
+document.getElementById("restDn").onclick=()=>setRest(restSec-5);
+const vsel=document.getElementById("voiceSel");
+if(vsel) vsel.onchange=()=>{
+  unlockAudio();
+  chosenVoice = voices.find(v=>v.name===vsel.value) || chosenVoice;
+  if(soundOn && "speechSynthesis" in window){ try{ speechSynthesis.cancel(); speechSynthesis.speak(makeUtter("Three, two, one, go.")); }catch(e){} }
+};
+document.getElementById("printBtn").onclick=()=>window.print();
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight")document.getElementById("next").click();
+  else if(e.key==="ArrowLeft")document.getElementById("prev").click();
+  else if(e.key===" "){e.preventDefault();document.getElementById("play").click();}
+});
+
+fit(); renderChips(); renderInfo(); renderPrintSheet(); startSequence(true); requestAnimationFrame(frame);
+</script>
+</body>
+</html>
