@@ -1463,35 +1463,86 @@
         limb(p1, mid, r1, midR, col);
       };
 
+      // Torso orientation for anatomy
+      let fx = 1, fy = 0;
+      if (P.hi && P.sh) {
+        const tdx = P.sh[0] - P.hi[0], tdy = P.sh[1] - P.hi[1];
+        const tLen = Math.hypot(tdx, tdy);
+        if(tLen > 0) { fx = -tdy / tLen; fy = tdx / tLen; }
+      }
+
+      const drawShoe = (kn, fo, col) => {
+        const dx = fo[0] - kn[0], dy = fo[1] - kn[1];
+        const len = Math.hypot(dx, dy);
+        const dxN = len > 0 ? dx/len : 0, dyN = len > 0 ? dy/len : 1;
+        disc(fo, 5, col); // ankle
+        limb(fo, [fo[0] + fx*8 + dxN*2, fo[1] + fy*8 + dyN*2], 5, 3.5, col); // toe
+      };
+
+      const drawHand = (el, ha, col) => {
+        const dx = ha[0] - el[0], dy = ha[1] - el[1];
+        const len = Math.hypot(dx, dy);
+        if(len > 0) limb(ha, [ha[0] + dx/len*5, ha[1] + dy/len*5], 4.5, 3.5, col);
+        else disc(ha, 4.5, col);
+      };
+
       if (P.kn2) { 
         limb(P.hi, P.kn2, 11, 7.5, PAL.skin2);
+        if(P.fo2) {
+          const midK = [P.kn2[0]*0.6 + P.fo2[0]*0.4 - fx*2, P.kn2[1]*0.6 + P.fo2[1]*0.4 - fy*2];
+          limb(P.kn2, midK, 7.5, 8.5, PAL.skin2); // calf bulge
+          limb(midK, P.fo2, 8.5, 4.5, PAL.skin2);
+        }
         halfLimb(P.hi, P.kn2, 12.5, 9.5, PAL.shorts2);
-        if (P.fo2) { limb(P.kn2, P.fo2, 7.5, 4.5, PAL.skin2); disc(P.fo2, 5.5, PAL.shoe2); }
+        if (P.fo2) drawShoe(P.kn2, P.fo2, PAL.shoe2);
       }
       if (P.el2) { 
         limb(P.sh, P.el2, 8.5, 6.5, PAL.skin2);
         halfLimb(P.sh, P.el2, 9.5, 8, PAL.shirt2);
-        if (P.ha2) { limb(P.el2, P.ha2, 6.5, 4.5, PAL.skin2); disc(P.ha2, 4.5, PAL.skin2); }
+        if (P.ha2) { limb(P.el2, P.ha2, 6.5, 4.5, PAL.skin2); drawHand(P.el2, P.ha2, PAL.skin2); }
       }
+
+      // TORSO
       if (P.hi && P.sh) {
-        limb(P.sh, P.hi, 14, 12, PAL.shirt);
-        limb(P.hi, [P.hi[0], P.hi[1] + 5], 13, 12, PAL.shorts);
+        limb(P.sh, P.hi, 13, 11.5, PAL.shirt); // core
+        const chest = [P.sh[0]*0.7 + P.hi[0]*0.3 + fx*4, P.sh[1]*0.7 + P.hi[1]*0.3 + fy*4];
+        limb(P.sh, chest, 13, 12.5, PAL.shirt); // chest
+        limb(chest, P.hi, 12.5, 11.5, PAL.shirt);
+        limb(P.hi, [P.hi[0], P.hi[1] + 5], 13.5, 12, PAL.shorts); // waist
+        disc([P.hi[0] - fx*4, P.hi[1] - fy*2], 12.5, PAL.shorts); // glute
       }
+
+      // HEAD
       if (P.he && P.sh) {
-        limb(P.sh, P.he, 6, 6, PAL.skin);
-        disc(P.he, 11, PAL.skin);
-        disc([P.he[0], P.he[1] - 4], 10, PAL.hair);
-        disc([P.he[0] - 4, P.he[1] - 2], 9, PAL.hair);
+        const ux = (P.he[0] - P.sh[0])/16, uy = (P.he[1] - P.sh[1])/16; // Up approx
+        limb(P.sh, P.he, 6, 6, PAL.skin); // neck
+        disc(P.he, 11, PAL.skin); // base head
+        
+        ctx.fillStyle = PAL.skin; ctx.beginPath(); // face profile
+        ctx.arc(P.he[0] + fx*10 + ux*1, P.he[1] + fy*10 + uy*1, 2.5, 0, Math.PI*2); // nose
+        ctx.arc(P.he[0] + fx*6 - ux*7, P.he[1] + fy*6 - uy*7, 3.5, 0, Math.PI*2); // chin
+        ctx.fill();
+
+        disc([P.he[0] + fx*6 + ux*2, P.he[1] + fy*6 + uy*2], 1.5, "#1a1a1a"); // eye
+
+        disc([P.he[0] - fx*2 + ux*9, P.he[1] - fy*2 + uy*9], 10, PAL.hair); // hair top
+        disc([P.he[0] - fx*9 - ux*1, P.he[1] - fy*9 - uy*1], 10, PAL.hair); // hair back
       }
+
       if (P.kn) { 
         limb(P.hi, P.kn, 11, 8, PAL.skin);
+        if(P.fo) {
+          const midK = [P.kn[0]*0.6 + P.fo[0]*0.4 - fx*2, P.kn[1]*0.6 + P.fo[1]*0.4 - fy*2];
+          limb(P.kn, midK, 8, 9, PAL.skin); // calf bulge
+          limb(midK, P.fo, 9, 5, PAL.skin);
+        }
         halfLimb(P.hi, P.kn, 12.5, 10, PAL.shorts);
-        if (P.fo) { limb(P.kn, P.fo, 8, 5, PAL.skin); disc(P.fo, 6, PAL.shoe); }
+        if (P.fo) drawShoe(P.kn, P.fo, PAL.shoe);
       }
       if (P.el) { 
         limb(P.sh, P.el, 9, 7, PAL.skin);
         halfLimb(P.sh, P.el, 10, 8.5, PAL.shirt);
-        if (P.ha) { limb(P.el, P.ha, 7, 5, PAL.skin); disc(P.ha, 5, PAL.skin); }
+        if (P.ha) { limb(P.el, P.ha, 7, 5, PAL.skin); drawHand(P.el, P.ha, PAL.skin); }
       }
     }
 
