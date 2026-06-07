@@ -637,7 +637,7 @@ function visible(){ return EX.map((e,i)=>({e,i})).filter(x=>x.e.cat===cat); }
 
 function setPhase(newPhase) {
   phase = newPhase;
-  const collapse = (phase === "counting" || phase === "countin");
+  const collapse = (phase === "counting" || phase === "countin" || phase === "rest");
   const infoEl = document.querySelector(".info");
   const paceEl = document.querySelector(".pacebar");
   const setEl = document.querySelector(".setbar");

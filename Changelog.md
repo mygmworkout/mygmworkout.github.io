@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Sped up the voice rate for the "3-2-1 Go" countdowns and explicitly linked the exercise start (`beginCounting`) to the speech synthesizer's `onend` event to completely eliminate audio overlap.
 - Flawlessly synced the visual exercise steps (`<ol class="steps">`) to dynamically highlight exactly as the voice reads each step aloud during the intro phase.
-- Dynamically collapse the exercise info (`.info`), pacebar, and setbar during active sets to focus purely on the workout animation, and restore them when resting or previewing.
+- Dynamically collapse the exercise info (`.info`), pacebar, and setbar during active sets *and* rest periods to maintain a clean focus purely on the workout animation. They restore only when previewing or done.
 - Perfectly synchronized the spoken voice counts with the on-screen character animation by dynamically driving the counts directly from the animation frame loop.
 - Refined the `.setbar` and `.pacebar` controls (Sets, Set Rest, Ex. Rest, Voice, and Pace) globally to be more compact by tightening gaps, padding, and font sizes.
 - Heavily compressed and optimized the mobile layout to fit all exercise info (controls, steps, load, setup, and animation) on a single screen without scrolling. This includes converting the `setup` info to a 3-column row and reshaping the `setbar` into a compact 2x2 grid.
