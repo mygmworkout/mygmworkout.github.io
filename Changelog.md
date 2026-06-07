@@ -13,3 +13,4 @@
 - Set the default category order to: Pilates Straps, Cable Strength, Stretch & Mobility.
 - Ensured the Pilates Straps category is selected by default when loading the page.
 - Adjusted CSS (`.exsel`) so both dropdowns fit side-by-side cleanly.
+- Moved the "Print / Save PDF" button from the top navigation area to the bottom of the page, centered in its own wrapper.

@@ -136,8 +136,9 @@
   footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:20px;padding:0 10px;max-width:60ch;margin-left:auto;margin-right:auto}
   footer b{color:var(--accent-ink);font-weight:600}
 
-  /* tab row + print button */
+  /* tab row */
   .tabwrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:22px auto 16px}
+  .printwrap{display:flex;justify-content:center;margin-top:24px;}
   .pbtn{cursor:pointer;border:1px solid var(--line);background:#ffffff0a;color:var(--ink);font-weight:600;
     font-size:12.5px;padding:9px 15px;border-radius:999px;transition:.2s}
   .pbtn:hover{background:#ffffff18;transform:translateY(-1px)}
@@ -161,7 +162,7 @@
     @page{margin:13mm}
     body{background:#fff!important;color:#1d1b15;padding:0}
     body::before{display:none}
-    header,.tabwrap,#strapNote,.card,footer{display:none!important}
+    header,.tabwrap,.printwrap,#strapNote,.card,footer{display:none!important}
     #printSheet{display:block}
   }
   .pwrap{font-family:"Hanken Grotesk",sans-serif;color:#1d1b15}
@@ -190,6 +191,7 @@
     .stepper { justify-content: space-between; }
     .vsel { max-width: none; flex: 1; margin-left: 10px; }
     .tabwrap { flex-direction: column; align-items: stretch; }
+    .printwrap { padding: 0 8px; }
     .exsel { max-width: 100%; }
     .pbtn { width: 100%; }
   }
@@ -205,7 +207,6 @@
   <div class="tabwrap">
     <select id="catSelect" class="exsel" aria-label="Select Category"></select>
     <select id="exerciseSelect" class="exsel" aria-label="Select Exercise"></select>
-    <button id="printBtn" class="pbtn" title="Print or save a PDF of every exercise">⤓ Print / Save PDF</button>
   </div>
 
   <main class="card">
@@ -259,6 +260,10 @@
       </div>
     </div>
   </details>
+
+  <div class="printwrap">
+    <button id="printBtn" class="pbtn" title="Print or save a PDF of every exercise">⤓ Print / Save PDF</button>
+  </div>
 
   <section id="printSheet" aria-hidden="true"></section>
 </div>
