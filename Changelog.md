@@ -10,10 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added 11 new Pilates workouts complete with steps, target reps, load suggestions, and reference photos (IMG_1771 - IMG_1783).
 - Added logic to automatically render and display workout photos in the UI when the animation canvas is not needed.
+- Added procedural animation parameters (start, end, pulley, attach, etc.) to the new Pilates exercises.
+- Added a Python script (`add_anims.py`) to help generate animation parameters.
 
 ### Changed
 - Re-organized the previous "Pilates Straps" and "Stretch & Mobility" categories into "Mat/Reformer (Core & Mobility)" and "Full Body".
 - Mapped all existing and new Pilates and stretch routines into these newly defined categories.
+- Updated the display logic in `index.html` to prioritize the procedural animation canvas over static photos if animation parameters are present.
 
 ### Fixed
 - Fixed a syntax error in index.html caused by malformed exercise objects.
