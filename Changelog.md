@@ -5,15 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2026-06-08
 
 ### Added
+- Added alternating limb logic to the procedural animation engine. Exercises focused on a single limb can now dynamically swap the active arm/leg every repetition using the `alt: true` property.
+- Added the `alt: true` property to all single-limb and alternating workouts (e.g., Roll Down with Twist Row, Lying Alternating Leg Press, Leg Circles, Scissors, Standing Butterfly, etc.).
 - Added 11 new Pilates workouts complete with steps, target reps, load suggestions, and reference photos (IMG_1771 - IMG_1783).
 - Added logic to automatically render and display workout photos in the UI when the animation canvas is not needed.
 - Added procedural animation parameters (start, end, pulley, attach, etc.) to the new Pilates exercises.
 - Added a Python script (`add_anims.py`) to help generate animation parameters.
 
 ### Changed
+- Fixed and updated the animation coordinates for "Feet Pulling Alternation" and "Feet Pulling Hamstring Curl" so that only the active leg curls while the idle leg remains stationary.
 - Re-organized the previous "Pilates Straps" and "Stretch & Mobility" categories into "Mat/Reformer (Core & Mobility)" and "Full Body".
 - Mapped all existing and new Pilates and stretch routines into these newly defined categories.
 - Updated the display logic in `index.html` to prioritize the procedural animation canvas over static photos if animation parameters are present.
