@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added 11 new Pilates workouts complete with steps, target reps, load suggestions, and reference photos (IMG_1771 - IMG_1783).
+- Added logic to automatically render and display workout photos in the UI when the animation canvas is not needed.
+
+### Changed
+- Re-organized the previous "Pilates Straps" and "Stretch & Mobility" categories into "Mat/Reformer (Core & Mobility)" and "Full Body".
+- Mapped all existing and new Pilates and stretch routines into these newly defined categories.
 ## [1.0.0] - 2026-06-07
 
 ### Changed

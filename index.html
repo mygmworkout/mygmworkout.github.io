@@ -1118,6 +1118,7 @@
           <div class="tempolbl" id="tempolbl">Tempo</div>
         </div>
         <canvas id="stage" width="480" height="320" aria-label="Exercise animation"></canvas>
+        <img id="stageImg" style="display:none; width: 100%; border-radius: 8px; border: 1px solid #00000020; max-height: 320px; object-fit: contain;">
         <div class="exno" id="exno"></div>
       </section>
     </main>
@@ -1202,8 +1203,107 @@
       },
 
       /* ============ PILATES STRAPS ============ */
+
       {
-        cat: "strap", id: "footwork", name: "Footwork / Leg Press", focus: "Reformer · Legs",
+        cat: "mat", id: "rolldown", name: "Roll Down Round Back", focus: "Core & Mobility",
+        sub: "Relax the shoulders and neck. Keep the legs together, extended and locked.",
+        setup: { Height: "Low port", Attach: "Handles", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1771.jpg",
+        steps: [
+          "Exhale, draw the navel toward the spine, tuck the pelvis, and roll backward from the tailbone to form a C-curve in the spine.",
+          "Continue rolling the spine down, one vertebra at a time, until lying flat on the mat; keep the feet pressed into the mat, avoiding lifting or rocking.",
+          "Use abdominal engagement to roll the body back up, stacking the spine sequentially to return to a tall, seated position."
+        ]
+      },
+      {
+        cat: "fullbody", id: "rolldown_bicep", name: "Roll Down with Bicep Curls", focus: "Core & Arms",
+        sub: "Extend the legs forward. Keep the torso in a stable C-curve—avoid rocking.",
+        setup: { Height: "Low port", Attach: "Handles", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1772.jpg",
+        steps: [
+          "Exhale, keep the torso in a C-curve, bend the elbows, and pull them backward; keep the upper arms stable.",
+          "Inhale, resist the cable tension, and slowly extend the arms back to the starting position—avoid letting the cable pull them back too quickly."
+        ]
+      },
+      {
+        cat: "fullbody", id: "rolldown_row", name: "Roll Down with Row", focus: "Core & Back",
+        sub: "Extend both legs straight forward, together and locked. Lean the torso back about 45°.",
+        setup: { Height: "Low port", Attach: "Handles", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
+        img: "img/IMG_1773.jpg",
+        steps: [
+          "Exhale. Maintain a stable C-curve in the torso and bend the elbows to pull back horizontally.",
+          "Inhale. Slowly extend the arms back to the starting position against the cable resistance, avoiding a quick snap back."
+        ]
+      },
+      {
+        cat: "mat", id: "rolldown_twist", name: "Roll Down with Twist Row", focus: "Core, Back & Mobility",
+        sub: "Lean the torso back about 45°, supported on the sacrum. Raise the arms to shoulder height.",
+        setup: { Height: "Low port", Attach: "Handles", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1775.jpg",
+        steps: [
+          "Roll the torso down and lean back to about 45°, supported and stable. Exhale as you bend the right elbow and pull back, rotating the head and thoracic spine to look to the right. Inhale to return to center.",
+          "Exhale to pull back with the left elbow, rotating the thoracic spine to look left. Inhale to slowly return the straps. Alternate sides."
+        ]
+      },
+      {
+        cat: "mat", id: "supine_scissors", name: "Supine Leg Scissors", focus: "Core",
+        sub: "Keep the pelvis stable, with the lower back pressed gently into the mat.",
+        setup: { Height: "Low port", Attach: "Ankle straps", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1776.jpg",
+        steps: [
+          "Lie on your back with your core engaged and both legs lifted about 30° off the floor. Inhale to prepare; exhale as one leg extends upward toward the ceiling while the other lowers with control toward the floor.",
+          "Inhale as the legs switch positions in the air, maintaining length and control, continuing the scissor-like alternation.",
+          "Optionally, flex the toes upward or point them downward to increase activation of the posterior or anterior leg muscles."
+        ]
+      },
+      {
+        cat: "fullbody", id: "parallel_press", name: "Parallel Press", focus: "Legs",
+        sub: "Press the lower back into the mat and lengthen the spine away from the tailbone.",
+        setup: { Height: "Low port", Attach: "Ankle straps", Mode: "Free Lift · Constant", Load: "Red spring · 15–22 lb/side" },
+        img: "img/IMG_1777.jpg",
+        steps: [
+          "Lie on your back in tabletop position, keeping the legs together and core engaged. Exhale as you extend the legs and lower them toward the floor, keeping them close to the ground.",
+          "Inhale, flexing the hips to lift the legs back up to the bent-knee, bent-hip position.",
+          "Keep the core engaged and stable, moving with a smooth, controlled rhythm; avoid using momentum."
+        ]
+      },
+      {
+        cat: "fullbody", id: "lying_alt_press", name: "Lying Alternating Leg Press", focus: "Legs",
+        sub: "Keep the pelvis stable, with the lower back pressed close to the mat.",
+        setup: { Height: "Low port", Attach: "Ankle straps", Mode: "Free Lift · Constant", Load: "Red spring · 15–22 lb/side" },
+        img: "img/IMG_1778.jpg",
+        steps: [
+          "Lie on your back in a table-top position, with the arms relaxed at your sides. Keep the pelvis stable and pressed into the mat. Inhale to prepare.",
+          "Exhale and extend one leg downward, lowering it to about 45° or slightly below, while keeping the lumbar spine and torso stable.",
+          "Inhale, engaging the core and hips to control the leg as it returns. Exhale and repeat on the other side, alternating legs."
+        ]
+      },
+      {
+        cat: "mat", id: "supine_helicopter", name: "Supine Leg Helicopter", focus: "Core & Mobility",
+        sub: "Keep the pelvis stable, with the lower back gently pressed into the mat.",
+        setup: { Height: "Low port", Attach: "Ankle straps", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1779.jpg",
+        steps: [
+          "Inhale to prepare while lying on your back, engaging the core and lifting both legs about 30° off the floor.",
+          "Exhale as you perform the scissor legs: one leg rises toward vertical while the other lowers with control.",
+          "Inhale as the legs switch positions in the air, completing the second scissor.",
+          "Exhale: when the legs reach their farthest points, open them outward in a circular motion; inhale to bring them back together along the scissor path and continue the movement."
+        ]
+      },
+      {
+        cat: "fullbody", id: "breaststroke_armlift", name: "Breaststroke Arm Lift", focus: "Back & Core",
+        sub: "Keep the neck neutral and extended, with shoulders down. Engage the abdominal muscles.",
+        setup: { Height: "Low port", Attach: "Handles + Bench", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
+        img: "img/IMG_1780.jpg",
+        steps: [
+          "Inhale. Start with the arms naturally bent at the sides of the waist. Exhale, engage the shoulders and arms to push the arms straight overhead.",
+          "Inhale. Keep the shoulders and back engaged, control the arms as they open out to the sides at shoulder height, feeling the eccentric stretch.",
+          "Exhale. Engage the shoulders to lift the arms overhead. Inhale, control the lowering back to shoulder height."
+        ]
+      },
+
+      {
+        cat: "fullbody", id: "footwork", name: "Footwork / Leg Press", focus: "Reformer · Legs",
         sub: "Lying on the platform with feet in the straps, press the legs long and float them back.",
         setup: { Height: "Bottom port", Attach: "Straps + loops (feet)", Mode: "Free Lift · Constant", Load: "Red spring · 15–22 lb/side" },
         pulley: "low", attach: "fo", attach2: "fo2", period: 3.4, ringFrom: .5, strap: true,
@@ -1212,7 +1312,7 @@
         steps: ["Attach the Pilates straps low and lie back with both feet in the loops.", "Start with knees bent toward you, heels together, spine neutral.", "Exhale and press both legs to nearly straight, controlling the springs.", "Inhale and fold the knees back in slowly — don't let them snap.", "Keep the pelvis still and the low back gently anchored."]
       },
       {
-        cat: "strap", id: "circles", name: "Leg Circles", focus: "Reformer · Hips & core",
+        cat: "mat", id: "circles", name: "Leg Circles", focus: "Reformer · Hips & core",
         sub: "One foot in a strap, draw smooth controlled circles from the hip joint.",
         setup: { Height: "Bottom port", Attach: "Strap + loop (one foot)", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
         pulley: "low", attach: "fo", period: 4, ringFrom: .5, strap: true,
@@ -1221,7 +1321,7 @@
         steps: ["Set a low pulley with light springs and place one foot in the strap.", "Extend that leg up toward the rack; rest the other leg long.", "Trace a controlled circle, crossing the midline and opening out.", "Keep the circle small enough that the pelvis stays still.", "Do 8–10 each direction, then switch legs."]
       },
       {
-        cat: "strap", id: "scissors", name: "Scissors", focus: "Reformer · Core",
+        cat: "mat", id: "scissors", name: "Scissors", focus: "Reformer · Core",
         sub: "Both feet in the straps, split the legs and switch in a slow, controlled scissor.",
         setup: { Height: "Bottom port", Attach: "Straps + loops (feet)", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
         pulley: "low", attach: "fo", attach2: "fo2", period: 3, ringFrom: .5, strap: true,
@@ -1230,7 +1330,7 @@
         steps: ["Lie back with both feet in the straps and legs reaching up.", "Curl the head and shoulders up to engage the core (optional).", "Lower one leg away as the other floats toward you — a long split.", "Switch legs smoothly, like scissors, against the spring tension.", "Keep the low back stable; move from the hips, not the back."]
       },
       {
-        cat: "strap", id: "slstretch", name: "Single-Leg Stretch", focus: "Reformer · Deep core",
+        cat: "mat", id: "slstretch", name: "Single-Leg Stretch", focus: "Reformer · Deep core",
         sub: "Curled up with feet in the straps, draw one knee in as the other reaches long.",
         setup: { Height: "Bottom port", Attach: "Straps + loops (feet)", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
         pulley: "low", attach: "fo", attach2: "fo2", period: 2.8, ringFrom: .5, strap: true,
@@ -1239,7 +1339,7 @@
         steps: ["Place both feet in the straps and curl your head and chest up.", "Draw one knee toward your chest as the other leg extends long.", "Switch, keeping the extended leg high enough to protect the back.", "Move with the breath — inhale a switch, exhale a switch.", "Hold the curl steady; the springs add gentle resistance."]
       },
       {
-        cat: "strap", id: "hundred", name: "The Hundred", focus: "Reformer · Core & breath",
+        cat: "mat", id: "hundred", name: "The Hundred", focus: "Reformer · Core & breath",
         sub: "Hands in the straps, curl up and pump the arms with strong steady breaths.",
         setup: { Height: "Bottom port", Attach: "Straps + loops (hands)", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
         pulley: "low", attach: "ha", period: 0.9, ringFrom: .5, strap: true,
@@ -1248,7 +1348,7 @@
         steps: ["Hold the straps with light springs and lie back, legs at a high diagonal.", "Curl your head and shoulders up; reach the arms long by your sides.", "Pump the arms up and down briskly against the strap tension.", "Inhale for five beats, exhale for five — ten breaths total.", "Keep the gaze toward your thighs and the core scooped."]
       },
       {
-        cat: "strap", id: "armpull", name: "Seated Arm Pull", focus: "Reformer · Back & posture",
+        cat: "fullbody", id: "armpull", name: "Seated Arm Pull", focus: "Reformer · Back & posture",
         sub: "Sit tall facing the rack and draw the straps back, opening the chest.",
         setup: { Height: "Bottom port", Attach: "Straps + loops (hands)", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
         pulley: "mid", attach: "ha", period: 3, ringFrom: .5, strap: true,
@@ -1259,7 +1359,7 @@
 
       /* ---- Speediance app Pilates: standing & bench (straps/handles) ---- */
       {
-        cat: "strap", id: "butterfly", name: "Standing Butterfly", focus: "Pilates · Side body",
+        cat: "mat", id: "butterfly", name: "Standing Butterfly", focus: "Pilates · Side body",
         sub: "A standing side bend — the top arm sweeps overhead in an arc as the lower arm draws down.",
         setup: { Height: "High port", Attach: "Straps / handles", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
         pulley: "high", attach: "ha", period: 4, ringFrom: .5, strap: true,
@@ -1268,7 +1368,7 @@
         steps: ["Stand tall on the platform, top hand in the overhead strap, lower hand in the low strap.", "Lengthen the whole body upward, shoulders relaxed and down, arms fully extended.", "Exhale and bend the torso to one side — sweep the top arm overhead in an arc as the lower arm pulls toward the floor.", "Keep the lower body stable and the torso long, not collapsing.", "Inhale and return to the lengthened center with control, then repeat to the other side."]
       },
       {
-        cat: "strap", id: "punch", name: "Standing Punch", focus: "Pilates · Core & power",
+        cat: "fullbody", id: "punch", name: "Standing Punch", focus: "Pilates · Core & power",
         sub: "In a split stance, punch one handle forward while the other stays at the ribs, then alternate.",
         setup: { Height: "Mid port", Attach: "Dual handles", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
         pulley: "mid", attach: "ha", attach2: "ha2", period: 2.6, ringFrom: .5, strap: true,
@@ -1277,25 +1377,47 @@
         steps: ["Set mid cables with a handle in each hand and stand in a split stance, core braced and spine neutral.", "Keep the knees tracking over the toes and the shoulders relaxed down.", "Exhale, settle into the lunge, and punch one hand straight forward as the other stays at the ribs.", "Inhale, press through the front foot, and control both arms back to the start.", "Alternate sides with control, keeping the torso square."]
       },
       {
-        cat: "strap", id: "feetalt", name: "Feet Pulling Alternation", focus: "Pilates · Hamstrings",
-        sub: "Prone on the bench, feet in the straps — curl one heel toward the glutes, then alternate.",
+        cat: "fullbody", id: "feetalt", name: "Feet Pulling Alternation", focus: "Pilates · Hamstrings",
+        sub: "Keep the spine neutral and the pelvis stable. Keep the thighs stable and pressed against the mat.",
         setup: { Height: "High port", Attach: "Ankle straps + bench", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
+        img: "img/IMG_1783.jpg",
+        pulley: "high", attach: "fo", attach2: "fo2", period: 2.6, ringFrom: .5, strap: true, bench: true,
+        start: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [300, 104], kn2: [288, 156], fo2: [270, 106] },
+        end: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [266, 100], kn2: [288, 156], fo2: [306, 110] },
+        steps: [
+          "Lie prone with the pelvis stable on the mat and the abdominals lightly engaged. Keep the legs together, knees bent at about 90° pointing toward the ceiling. Inhale to prepare.",
+          "Exhale, keeping one leg straight and stable while engaging the hamstring of the other leg to bend the knee, bringing the heel toward the glutes in a controlled manner without rocking the pelvis.",
+          "Inhale to return the leg to the starting bent position with control.",
+          "Exhale, switch legs, and repeat the single-leg curl, maintaining rhythm and stability."
+        ]
+      },
         pulley: "high", attach: "fo", attach2: "fo2", period: 2.6, ringFrom: .5, strap: true, bench: true,
         start: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [300, 104], kn2: [288, 156], fo2: [270, 106] },
         end: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [266, 100], kn2: [288, 156], fo2: [306, 110] },
         steps: ["Lie face-down on the bench, pelvis stable, abdominals lightly engaged, both feet in the straps.", "Bring the legs together with the knees bent about 90°, shins pointing up.", "Exhale and curl one heel toward your glutes while the other leg stays still.", "Inhale to return that leg with control — don't rock the pelvis.", "Exhale, switch legs, and keep an even rhythm side to side."]
       },
       {
-        cat: "strap", id: "feetcurl", name: "Feet Pulling Hamstring Curl", focus: "Pilates · Hamstrings",
-        sub: "Prone on the bench, feet in the straps — curl both heels toward the glutes together.",
+        cat: "fullbody", id: "feetcurl", name: "Feet Pulling Hamstring Curl", focus: "Pilates · Hamstrings",
+        sub: "Keep the spine stable in a neutral position. Keep the core and pelvis stable, maintaining contact with the mat at all times.",
         setup: { Height: "High port", Attach: "Ankle straps + bench", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
+        img: "img/IMG_1782.jpg",
+        pulley: "high", attach: "fo", attach2: "fo2", period: 3, ringFrom: .5, strap: true, bench: true,
+        start: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [300, 104], kn2: [288, 156], fo2: [306, 110] },
+        end: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [266, 100], kn2: [288, 156], fo2: [272, 106] },
+        steps: [
+          "Lie prone with the pelvis stable against the mat and the abdominals lightly engaged. Bring the legs together, bending the knees to about 90° toward the ceiling. Inhale to prepare.",
+          "Exhale, keeping one leg straight and stable while the other leg performs a controlled hamstring curl, bringing the heel toward the glutes. Keep the pelvis stable.",
+          "Inhale, control the leg as it returns to the starting bent position.",
+          "Exhale, switch legs and repeat the single-leg curl, maintaining rhythm and stability."
+        ]
+      },
         pulley: "high", attach: "fo", attach2: "fo2", period: 3, ringFrom: .5, strap: true, bench: true,
         start: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [300, 104], kn2: [288, 156], fo2: [306, 110] },
         end: { he: [92, 150], sh: [140, 150], hi: [250, 150], kn: [288, 150], fo: [266, 100], kn2: [288, 156], fo2: [272, 106] },
         steps: ["Lie prone on the bench, pelvis pressed down, abdominals lightly on, both feet in the straps.", "Legs together, knees bent to about 90°, shins toward the ceiling. Inhale to prepare.", "Exhale and curl both heels toward your glutes with control.", "Keep the pelvis still and in contact with the bench throughout.", "Inhale and lower the shins back to 90° slowly against the springs."]
       },
       {
-        cat: "strap", id: "breaststroke", name: "Breaststroke", focus: "Pilates · Back extension",
+        cat: "mat", id: "breaststroke", name: "Breaststroke", focus: "Pilates · Back extension",
         sub: "Prone with arms reaching forward in the straps — lift the chest and legs together.",
         setup: { Height: "High port", Attach: "Straps (hands) + bench", Mode: "Free Lift · Constant", Load: "Yellow spring · 4–7 lb/side" },
         pulley: "high", attach: "ha", attach2: "ha2", period: 3.6, ringFrom: .5, strap: true, bench: true,
@@ -1304,7 +1426,7 @@
         steps: ["Lie face-down on the bench, neck long, shoulders down, core engaged, a strap in each hand reaching forward.", "Inhale to prepare with the arms stretched forward and the legs long behind.", "Exhale and lift the chest and legs off the bench together, keeping length through the body.", "Hold the lifted extension briefly, balanced and stable.", "Inhale, then control the descent back to the start, lengthening as you lower."]
       },
       {
-        cat: "strap", id: "breastpress", name: "Breaststroke Press + Extension", focus: "Pilates · Upper back",
+        cat: "fullbody", id: "breastpress", name: "Breaststroke Press + Extension", focus: "Pilates · Upper back",
         sub: "Prone, press the straps from your waist to straight overhead as the upper back extends.",
         setup: { Height: "High port", Attach: "Straps (hands) + bench", Mode: "Free Lift · Constant", Load: "Blue spring · 10–12 lb/side" },
         pulley: "high", attach: "ha", attach2: "ha2", period: 3.6, ringFrom: .5, strap: true, bench: true,
@@ -1315,7 +1437,7 @@
 
       /* ---- Speediance app Pilates: stretch & mobility (bodyweight) ---- */
       {
-        cat: "stretch", id: "child", name: "Child's Pose", focus: "Stretch · Lats & lower back",
+        cat: "mat", id: "child", name: "Child's Pose", focus: "Stretch · Lats & lower back",
         sub: "Sit the hips back to the heels and fold forward, resting the forehead and reaching the arms long.",
         setup: { Height: "—", Attach: "Mat", Mode: "Hold & breathe" },
         pulley: "low", period: 5, ringFrom: .5,
@@ -1324,7 +1446,7 @@
         steps: ["Kneel with the knees about hip-width and the tops of the feet pressing into the mat.", "Sit the hips back toward the heels and keep the pelvis stable.", "Lengthen the spine, then hinge forward from the hips.", "Rest the forehead on the mat and reach the arms forward (or lay them by your sides).", "Keep the hips close to the heels and breathe evenly through the stretch."]
       },
       {
-        cat: "stretch", id: "cheststretch", name: "Chest Stretch", focus: "Stretch · Chest & rotation",
+        cat: "mat", id: "cheststretch", name: "Chest Stretch", focus: "Stretch · Chest & rotation",
         sub: "Seated tall, open into a thoracic rotation, reaching the top arm back to lift the sternum.",
         setup: { Height: "—", Attach: "Mat", Mode: "Hold & breathe" },
         pulley: "low", period: 4.5, ringFrom: .5,
@@ -1333,7 +1455,7 @@
         steps: ["Sit tall with the legs folded comfortably and one hand resting on the mat for support.", "Lightly engage the core, keep the pelvis neutral, and let the shoulders relax down.", "Inhale to prepare, then with the top arm straight, open it across into a rotation.", "Let the rib cage lead the upper body as you reach the arm back, lifting the sternum.", "Exhale to return to center with control, then repeat on the other side."]
       },
       {
-        cat: "stretch", id: "hammy", name: "Hamstring Stretch", focus: "Stretch · Hamstrings",
+        cat: "mat", id: "hammy", name: "Hamstring Stretch", focus: "Stretch · Hamstrings",
         sub: "Seated forward fold over extended legs, hinging from the hips to reach the feet.",
         setup: { Height: "—", Attach: "Mat", Mode: "Hold & breathe" },
         pulley: "low", period: 5, ringFrom: .5,
@@ -1342,7 +1464,7 @@
         steps: ["Sit tall with the legs extended together (or hip-width), feet flexed.", "Lightly engage the core, keep the pelvis neutral, and lengthen the spine.", "Inhale and reach forward toward the ankles.", "Exhale and hinge from the hips into a forward fold, feeling the hamstrings lengthen.", "Breathe steadily, then exhale to return upright with the feet still flexed."]
       },
       {
-        cat: "stretch", id: "glutestretch", name: "Glutes Stretch", focus: "Stretch · Hips & glutes",
+        cat: "mat", id: "glutestretch", name: "Glutes Stretch", focus: "Stretch · Hips & glutes",
         sub: "A pigeon-style fold — one leg forward and bent, the other extended back, hinging forward.",
         setup: { Height: "—", Attach: "Mat", Mode: "Hold & breathe" },
         pulley: "low", period: 5, ringFrom: .5,
@@ -1358,6 +1480,15 @@
       press: { cables: 2, perSide: [20, 40] }, curl: { cables: 2, perSide: [10, 20] },
       pushdown: { cables: 1, perSide: [15, 30] }, squat: { cables: 2, perSide: [15, 30] },
       rdl: { cables: 2, perSide: [15, 30] },
+      rolldown: { cables: 2, perSide: [4, 7], spring: "Yellow" },
+      rolldown_bicep: { cables: 2, perSide: [4, 7], spring: "Yellow" },
+      rolldown_row: { cables: 2, perSide: [10, 12], spring: "Blue" },
+      rolldown_twist: { cables: 2, perSide: [4, 7], spring: "Yellow" },
+      supine_scissors: { cables: 2, perSide: [4, 7], spring: "Yellow" },
+      parallel_press: { cables: 2, perSide: [15, 22], spring: "Red" },
+      lying_alt_press: { cables: 2, perSide: [15, 22], spring: "Red" },
+      supine_helicopter: { cables: 2, perSide: [4, 7], spring: "Yellow" },
+      breaststroke_armlift: { cables: 2, perSide: [4, 7], spring: "Yellow" },
       footwork: { cables: 2, perSide: [15, 22], spring: "Red" }, circles: { cables: 1, perSide: [4, 7], spring: "Yellow" },
       scissors: { cables: 2, perSide: [10, 12], spring: "Blue" }, slstretch: { cables: 2, perSide: [4, 7], spring: "Yellow" },
       hundred: { cables: 2, perSide: [4, 7], spring: "Yellow" }, armpull: { cables: 2, perSide: [10, 12], spring: "Blue" },
@@ -1568,7 +1699,7 @@
       if (a1) { if (ex.strap) { disc(a1, 7, PAL.strap); disc(a1, 3, PAL.strapIn); } else disc(a1, 6.5, PAL.grip); }
     }
 
-    let idx = 7, cat = "strap", playing = false, t0 = performance.now(), curStep = 0, stepAcc = 0;
+    let idx = 7, cat = "mat", playing = false, t0 = performance.now(), curStep = 0, stepAcc = 0;
     let lastP = 0, lastNow = 0;
 
     function visible() { return EX.map((e, i) => ({ e, i })).filter(x => x.e.cat === cat); }
@@ -1598,7 +1729,17 @@
       }
       if (playing) lastP = p;
       const P = joints(ex, p), t = tphase(ex, p);
-      scene(ex, P);
+      const stageEl = document.getElementById("stage");
+      const imgEl = document.getElementById("stageImg");
+      if (ex.img) {
+        stageEl.style.display = "none";
+        imgEl.style.display = "block";
+        imgEl.src = ex.img;
+      } else {
+        stageEl.style.display = "block";
+        imgEl.style.display = "none";
+        scene(ex, P);
+      }
       document.getElementById("ringI").style.transform = `scale(${0.5 + 0.55 * t})`;
       document.getElementById("tempolbl").textContent = ex.cat === "stretch" ? (t > 0.5 ? "Deepen" : "Ease") : (ex.strap ? (t > 0.5 ? "Press" : "Return") : (t > 0.5 ? "Lift" : "Lower"));
       if (playing && phase !== "intro" && phase !== "countin") {
@@ -1610,6 +1751,7 @@
     }
 
     function snapshot(ex) {
+      if (ex.img) return ex.img;
       const off = document.createElement("canvas"); off.width = 480; off.height = 320;
       const savedCtx = ctx, savedPAL = PAL;
       ctx = off.getContext("2d"); PAL = PRINT_PAL;
@@ -1648,7 +1790,7 @@
     }
 
     function renderPrintSheet() {
-      const cats = [["cable", "Cable Strength"], ["strap", "Pilates — Straps & Cable"], ["stretch", "Stretch & Mobility"]];
+      const cats = [["mat", "Mat/Reformer (Core & Mobility)"], ["fullbody", "Full Body"], ["cable", "Cable Strength"]];
       let html = `<div class="pwrap"><div class="ptitle">Speediance Gym Monster 1 — Exercise Library</div>
     <div class="pintro">Cable strength, reformer-style Pilates, and mobility. Max 220 lb total (110 lb/arm), 1 lb steps, 10 pulley heights. Pilates runs in Free Lift · Constant mode using the strap accessory; stretches are bodyweight holds.</div>
     <div class="pspringrow"><span><b>Yellow</b> light · 4–7 lb/side</span><span><b>Blue</b> medium · 10–12 lb/side</span><span><b>Red</b> heavy · 15–22 lb/side</span></div>`;
@@ -1668,7 +1810,7 @@
       document.getElementById("printSheet").innerHTML = html;
     }
 
-    const CATS = [["strap", "Pilates Straps"], ["cable", "Cable Strength"], ["stretch", "Stretch & Mobility"]];
+    const CATS = [["mat", "Mat/Reformer (Core & Mobility)"], ["fullbody", "Full Body"], ["cable", "Cable Strength"]];
     function renderDropdowns() {
       const catSel = document.getElementById("catSelect");
       const exSel = document.getElementById("exerciseSelect");
@@ -1706,6 +1848,8 @@
     /* ---- guided audio ---- */
     const TARGET = {
       pulldown: 12, row: 12, press: 12, curl: 15, pushdown: 15, squat: 12, rdl: 10,
+      rolldown: 10, rolldown_bicep: 10, rolldown_row: 10, rolldown_twist: 10,
+      supine_scissors: 10, parallel_press: 12, lying_alt_press: 12, supine_helicopter: 8, breaststroke_armlift: 8,
       footwork: 12, circles: 8, scissors: 10, slstretch: 10, hundred: 10, armpull: 10,
       butterfly: 8, punch: 10, feetalt: 10, feetcurl: 12, breaststroke: 8, breastpress: 10,
       child: 5, cheststretch: 5, hammy: 5, glutestretch: 5
