@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Re-organized the previous "Pilates Straps" and "Stretch & Mobility" categories into "Mat/Reformer (Core & Mobility)" and "Full Body".
 - Mapped all existing and new Pilates and stretch routines into these newly defined categories.
+
+### Fixed
+- Fixed a syntax error in index.html caused by malformed exercise objects.
 ## [1.0.0] - 2026-06-07
 
 ### Changed
